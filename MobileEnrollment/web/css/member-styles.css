@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 13, 2020, 4:47:13 PM
+    Author     : tom
+*/
+
+
+
+* { 
+    padding: 0;
+    margin: 0;
+}
+
+
+#studentPhoto {
+    max-width: 40vw;
+    height: auto;
+    border-radius: 50%;
+}
+
+#studentName {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.card {
+    max-width: 90%;
+    margin-top: 25px;
+}
+
+.form-group {
+    padding-top: 30px;
+}
+
+body {
+    font-family: 'Karla', sans-serif;
+}
+
+h1 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+}
+
+#regBtn {
+    margin-top: 15px;
+    border: none;
+    background-color: #1d3d70;
+    border-radius: 50px;
+    padding: 15px 30px;
+    color: white;
+}
+
+li {
+    padding-top: 20px; 
+}
+
+.footer {
+  padding-top: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #1d3d70;
+  color: white;
+  text-align: center;
+}
+
