@@ -1,6 +1,6 @@
 package servlets;
 
-import business.Student;
+import business.Students;
 import business.StudentDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 
+ * @author tom
  */
 public class StudentLogonServlet extends HttpServlet {
 
@@ -22,17 +22,17 @@ public class StudentLogonServlet extends HttpServlet {
         String msg = "", userid = "";
         String URL = "/Logon.jsp";
         String passatt;
-        Student s;
+        Students s;
         
         try {
-            userid = request.getParameter("userid").trim();
-            s = StudentDB.getMemberByID(userid);
+            userid = request.getParameter("stuId").trim();
+            s = StudentDB.getStudent(userid);
             if (s == null){
-                msg = "No member record retrieved <br>";
+                msg = "No student record retrieved <br>";
             } else {
-                msg = "Member "+ s.getLastname() + " found.";
+                msg = "Student "+ s.getStuFname() +  s.getStuLname() + " found.";
                 passatt = String.valueOf(request.getParameter("password").trim());
-                //s.setPassAttempt(passatt);
+                s.setPassAttempt(passatt);
                 if (!s.isAuthenticated()) {
                     msg = "Unable to authenticate<br>";
                 } else {

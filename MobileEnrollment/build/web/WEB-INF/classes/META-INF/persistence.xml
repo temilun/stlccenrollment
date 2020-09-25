@@ -3,12 +3,26 @@
   <persistence-unit name="MobileEnrollmentPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>business.Student</class>
+    <class>business.Semester</class>
+    <class>business.Transcript</class>
+    <class>business.Holds</class>
+    <class>business.Department</class>
+    <class>business.Course</class>
+    <class>business.Room</class>
+    <class>business.Section</class>
+    <class>business.Professor</class>
+    <class>business.Students</class>
+    <class>business.Employees</class>
+    <class>business.Program</class>
+    <class>business.Advisor</class>
+    <class>business.Campus</class>
+    <class>business.Building</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:9090/stlccenrollment?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="Pin>run9"/>
+      <property name="javax.persistence.jdbc.password" value="Pin&gt;run9"/>
     </properties>
   </persistence-unit>
 </persistence>

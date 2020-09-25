@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,9 +39,9 @@
         <div class="container">
             <form action="StudentLogon" method="post" id="loginForm">
                 <div class="form-group">
-                    <label for="userid">Username</label>
-                    <input type="text" name="userid" class="form-control" placeholder="User ID">
-                    <small id="uidTip" class="form-text text-muted">Note: this is your username, not email</small>
+                    <label for="userid">Student ID</label>
+                    <input type="text" name="stuId" class="form-control" placeholder="Student ID">
+                    <small id="uidTip" class="form-text text-muted">Note: this is your Student ID, not email or username</small>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" class="form-control" placeholder="Password">

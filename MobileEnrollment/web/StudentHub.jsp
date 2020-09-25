@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
  <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,6 +12,8 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        
+        <script src="./js/profilePicInitials.js"></script>
         <title>${m.firstnm} ${m.lastnm}</title>
         <style>
             table.member-details{
@@ -27,7 +28,7 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/ClubDBJPA";
+            window.location = "/MobileEnrollment/Logon.jsp";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
@@ -48,39 +49,40 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/ClubDBJPA">Logout</a>
+                      <a class="nav-link" href="/MobileEnrollment/Logon.jsp">Logout</a>
                   </li>
                 </ul>
             </div>
         </nav>
         
-    <div class="text-center" style="padding-top:30px;">
-        <img id="studentPhoto" src="./img/user.jpg" alt="Student profile picture">
-    </div>
-        
-    <h1 id="studentName" class="h3">${s.firstname} ${s.lastname}</h1>
-    <div class="text-center">${s.id}</div>
-    <div class="text-center">
-        <input type="submit" value="Class Registration"  id="regBtn">
-    </div>
-        
-    <div class="card bg-light mb-3 mx-auto info">
-        <div class="card-header">Welcome to the STLCC Registration Portal!</div>
-        <div class="card-body">
-            <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
+       
+        <div>
+            <h1 class="text-center" id="profileImage"></h1>
         </div>
-    </div>
-    
-    <div class="card bg-light mb-3 mx-auto info">
-        <div class="card-header">Need more help?</div>
-        <div class="card-body">
-            <p class="card-text">Your academic advisor would be happy to assist you via email or a live online meeting. To find out more information about your advisor, click <a href="#">HERE!</a></p>
-        </div>
-    </div>
         
-    <div class="footer">
-            <p>STLCC ©2020</p>
-    </div>
+        <h1 id="studentName" class="h3">${s.stuFname} ${s.stuLname}</h1>
+        <div class="text-center">${s.stuId}</div>
+        <div class="text-center">
+            <input type="submit" value="Class Registration"  id="regBtn">
+        </div>
+
+        <div class="card bg-light mb-3 mx-auto info">
+            <div class="card-header">Welcome to the STLCC Registration Portal!</div>
+            <div class="card-body">
+                <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
+            </div>
+        </div>
+
+        <div class="card bg-light mb-3 mx-auto info">
+            <div class="card-header">Need more help?</div>
+            <div class="card-body">
+                <p class="card-text">Your academic advisor would be happy to assist you via email or a live online meeting. To find out more information about your advisor, click <a href="#">HERE!</a></p>
+            </div>
+        </div>
+
+        <div class="footer">
+                <p>STLCC ©2021</p>
+        </div>
      
     </body>
     </c:if>
