@@ -1,10 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>STLCC Mobile Registration Login</title>
         <link rel="stylesheet" type="text/css" href="./css/logon-styles.css" />
+        <link rel="icon" href="./img/stlcc-logo.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -50,13 +53,19 @@
                     </small>
                 </div>
                 </div>
+
+                <div id="errmsg" class="text-center text-danger">
+                    ${msg}
+                </div>
+
+                
                 <div class="text-center">
                     <input type="submit" value="Login"  id="loginBtn">
                 </div>
             </form>
         </div>
         <br>
-        ${msg}
+        
         
         <div class="footer">
             <p>STLCC ©2020</p>

@@ -34,7 +34,7 @@ public class StudentLogonServlet extends HttpServlet {
                 passatt = String.valueOf(request.getParameter("password").trim());
                 s.setPassAttempt(passatt);
                 if (!s.isAuthenticated()) {
-                    msg = "Unable to authenticate<br>";
+                    msg = "Unable to authenticate";
                 } else {
                     URL = "/StudentHub.jsp";
                     request.getSession().setAttribute("s", s);

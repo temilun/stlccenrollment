@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/member-styles.css" />
+        <link rel="icon" href="./img/stlcc-logo.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -14,21 +15,12 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
         <script src="./js/profilePicInitials.js"></script>
-        <title>${m.firstnm} ${m.lastnm}</title>
-        <style>
-            table.member-details{
-                border-collapse: collapse;
-            }
-            table.member-details td, table.member-details th{
-                padding: 6px;
-                border: 1px solid #999;
-            }
-        </style>
+        <title>${s.stuFname} ${s.stuLname}</title>
 
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/MobileEnrollment/Logon.jsp";
+            window.location = "/Logon.jsp";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
@@ -63,8 +55,11 @@
         <h1 id="studentName" class="h3">${s.stuFname} ${s.stuLname}</h1>
         <div class="text-center">${s.stuId}</div>
         <div class="text-center">
-            <input type="submit" value="Class Registration"  id="regBtn">
+            <form action="./EnrollmentHome.jsp">
+                <input type="submit" value="Class Registration" id="regBtn">
+            </form>
         </div>
+            
 
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Welcome to the STLCC Registration Portal!</div>
@@ -81,7 +76,7 @@
         </div>
 
         <div class="footer">
-                <p>STLCC ©2021</p>
+                <p>STLCC ©2020</p>
         </div>
      
     </body>
