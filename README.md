@@ -1,6 +1,6 @@
 # STLCC Mobile Enrollment
 
-Group project for mobile registration web application.
+This is a student group project where we are building a mobile class registration web application.
 
 ## Workflow
 
