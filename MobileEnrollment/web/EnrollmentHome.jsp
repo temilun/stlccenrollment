@@ -1,6 +1,6 @@
 <%-- 
     Document   : EnrollmentHome
-    Description: This is where the student is taken if they press the "Class Registration" button. It serves as a course search tool.
+    Description: This is where the student is taken if they press the "Class Registration" button. It will serve as a course search tool.
     Author     : tom
 --%>
 
