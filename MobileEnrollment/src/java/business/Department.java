@@ -57,31 +57,5 @@ public class Department implements Serializable {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (deptId != null ? deptId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Department)) {
-            return false;
-        }
-        Department other = (Department) object;
-        if ((this.deptId == null && other.deptId != null) || (this.deptId != null && !this.deptId.equals(other.deptId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "business.Department[ deptId=" + deptId + " ]";
-    }
-    
+    }    
 }

@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="./css/member-styles.css" />
+        <link rel="stylesheet" type="text/css" href="./css/studentHub-styles.css" />
         <link rel="icon" href="./img/stlcc-logo.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet"> 
@@ -20,7 +20,7 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/Logon.jsp";
+            window.location = "/MobileEnrollment";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
@@ -55,7 +55,7 @@
         <h1 id="studentName" class="h3">${s.stuFname} ${s.stuLname}</h1>
         <div class="text-center">${s.stuId}</div>
         <div class="text-center">
-            <form action="./EnrollmentHome.jsp">
+            <form action="EnrollmentHome">
                 <input type="submit" value="Class Registration" id="regBtn">
             </form>
         </div>
@@ -73,12 +73,7 @@
             <div class="card-body">
                 <p class="card-text">Your academic advisor would be happy to assist you via email or a live online meeting. To find out more information about your advisor, click <a href="#">HERE!</a></p>
             </div>
-        </div>
-
-        <div class="footer">
-                <p>STLCC ©2020</p>
-        </div>
-     
+        </div>     
     </body>
     </c:if>
 </html>
