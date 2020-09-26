@@ -1,6 +1,6 @@
 <%-- 
     Document   : EnrollmentHome
-    Description: This is where the student is taken if they press the "Class Registration" button. It serves as a course search tool.
+    Description: This is where the student is taken if they press the "Class Registration" button. It will serve as a course search tool.
     Author     : tom
 --%>
 
@@ -46,6 +46,9 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/MobileEnrollment/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="/MobileEnrollment/Logon.jsp">Logout</a>
