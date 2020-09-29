@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>DisplaySectionsServlet</servlet-name>
+        <servlet-class>servlets.DisplaySectionsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SelectClassesServlet</servlet-name>
         <url-pattern>/SelectClasses</url-pattern>
@@ -7,6 +11,10 @@
     <servlet-mapping>
         <servlet-name>EnrollmentHomeServlet</servlet-name>
         <url-pattern>/EnrollmentHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplaySectionsServlet</servlet-name>
+        <url-pattern>/DisplaySections</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

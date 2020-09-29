@@ -1,8 +1,10 @@
 <%-- 
-    Document   : EnrollmentHome
-    Description: This is where the student is taken if they press the "Class Registration" button. It will serve as a course search tool.
+    Document   : SelectClasses
+    Description: Webpage to select classes from department selected on previous page
+    Created on : Sep 27, 2020, 9:09:30 PM
     Author     : tom
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="./css/enrollmentHome-styles.css" />
+        <link rel="stylesheet" type="text/css" href="./css/selectClasses-styles.css" />
         <link rel="icon" href="./img/stlcc-logo.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet"> 
@@ -20,7 +22,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
-        <script src="./js/enrollmentHome.js"></script>
+        
         <title>Enrollment Home - Search for classes</title>
         </style>
 
@@ -59,48 +61,50 @@
         
         <div class="registrationContainer">
             <div>
-                <h1 id="registrationHeader">Registration</h1>
+                <h1 id="registrationHeader">Select Classes</h1>
                 <hr>
             </div>
             <div id="mainForm">
-                <form action="SelectClasses">
-                    <div  id="sectionHead">
-                        <h3>Term</h3>
-                    </div>
-                    <ul id="termSelection" class="btn-group">
-                        <li>
-                            <input id="spring21" class="termbtn" type="radio" id="spring21" name="term" value="spring21" onclick="enableBtn();" required/>
-                            <label id="termLabel" for="spring21">Spring 2021</label>
-                        </li>
-                        <li>
-                            <input id="summer21" class="termbtn" type="radio" id="summer21" name="term" value="summer21" onclick="enableBtn();" required/>
-                            <label id="termLabel" for="summer21">Summer 2021</label>
-                        </li>
-                        <li>
-                            <input id="fall21" class="termbtn" type="radio" id="fall21" name="term" value="fall21" onclick="enableBtn();" required/>
-                            <label id="termLabel" for="fall21">Fall 2021</label>
-                        </li>
-                    </ul>
-                    
-                    <div id="sectionHead">
-                        <h3>Select Your Program</h3>
+                
+                
+                <script>
+                    //js to enable the 'display classes' button only after the
+                    //checkboxes are checked
+                    let enableBtn = () => {
+                        document.getElementById('disabledBtn').id = 'searchBtn';
+                    };
+                </script>
+                <!-- this form will take input from the user to find what classes
+                     are going to be searched -->
+                
+                <form action="DisplayClasses">
+                    <div class="sectionHead">
+                        <h3>Sections</h3>
+                        <small id="crsTip" class="form-text text-muted">
+                            Select all classes that you have interest in registering for,
+                            then hit "Display Classes"
+                        </small>
                     </div>
                     
-                    <div class="deptSelect" style="width:80%;">
-                        <select id="progID" name="progID">
-                            <c:forEach var='prog' items='${progs}'>
-                                <option value="${prog.progId}">${prog.progName}</option>
-                            </c:forEach>    
-                        </select>
-                    </div>
-                    <div class="text-center">
-                        <input type="submit" value="Search for courses" id="disabledBtn">    
-                    </div>                    
-                </form>              
+                    <!-- This is where the sections are displayed -->
+                    <!-- A 'for each' loop is ran with the JSTL library-->
+                    <!-- to run through our list section objects -->
+                    <!-- info on JSTL foreach can be found here:       -->
+                    <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
+                    <ul id="courseSelection" class="btn-group">
+                        <c:forEach var='section' items='${sections}'>
+                                <li>                                    
+                                    <input id="${section.crn}" class="crsCheckbox" type="checkbox" id="${section.crn}" name="${section.crn}" value="${section.crn}" onclick="enableBtn();"/>
+                                    <label class="checkLabel" for='${section.crn}'>${section.crn}</label>                                    
+                                </li>
+                        </c:forEach>
+                    </ul>         
+                    
+
+                    
+                    
+                </form>
             </div>
-        </div>
-        <div class="text-center" id="links">
-            <a href="./StudentHub.jsp">Back to Student Hub</a>
         </div>
         ${msg}
     </body>

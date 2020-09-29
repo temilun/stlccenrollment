@@ -83,21 +83,24 @@
                     </ul>
                     
                     <div id="sectionHead">
-                        <h3>Department</h3>
+                        <h3>Select Your Program</h3>
                     </div>
+                    
                     <div class="deptSelect" style="width:80%;">
-                        <select id="deptnm" name="deptnm">
-                            <c:forEach var='dept' items='${depts}'>
-                                <option value="${dept.deptId}">${dept.deptName}</option>
+                        <select id="progID" name="progID">
+                            <c:forEach var='prog' items='${progs}'>
+                                <option value="${prog.progId}">${prog.progName}</option>
                             </c:forEach>    
-                        </select>    
+                        </select>
                     </div>
                     <div class="text-center">
                         <input type="submit" value="Search for courses" id="disabledBtn">    
-                    </div>
-                    
-                </form>
+                    </div>                    
+                </form>              
             </div>
+        </div>
+        <div class="text-center" id="links">
+            <a href="./StudentHub.jsp">Back to Student Hub</a>
         </div>
         ${msg}
     </body>

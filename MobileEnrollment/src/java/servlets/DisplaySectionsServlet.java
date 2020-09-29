@@ -5,10 +5,8 @@
  */
 package servlets;
 
-import business.Department;
-import business.DepartmentDB;
-import business.Program;
-import business.ProgramDB;
+import business.Section;
+import business.SectionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tom
  */
-public class EnrollmentHomeServlet extends HttpServlet {
+public class DisplaySectionsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +34,25 @@ public class EnrollmentHomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "/EnrollmentHome.jsp", msg = "";
-        List<Program> progs;
+        String URL = "/DisplaySections.jsp", msg ="";
+        List<Section> sections = null;
+        String[] courseIDs;
         
         try {
-            progs = ProgramDB.getPrograms();
-            if (progs == null ) {
-                msg = "Programs returned null. <br>";
-                URL = "/StudentHub.jsp";
+            courseIDs = request.getParameterValues("checked");
+            sections = SectionDB.getSections(courseIDs);
+            
+            if (sections != null) {
+                request.getSession().setAttribute("sections", sections);
             } else {
-                request.getSession().setAttribute("progs", progs);
+                msg = "Sections returned null";
+                URL = "/DisplaySections.jsp";
             }
         } catch(Exception e) {
-            msg = "Program Select Servlet Error: " + e.getMessage();
-            URL = "/StudentHub.jsp";
+            msg = "Display Section servlet error: " + e.getMessage();
+            URL = "/DisplaySection.jsp";
         }
+        
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);

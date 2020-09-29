@@ -8,6 +8,7 @@ package business;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,6 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Course.findByCourseDesc", query = "SELECT c FROM Course c WHERE c.courseDesc = :courseDesc")
     , @NamedQuery(name = "Course.findByCourseCredit", query = "SELECT c FROM Course c WHERE c.courseCredit = :courseCredit")})
 public class Course implements Serializable {
+
+    @Column(name = "course_sub")
+    private String courseSub;
+    @Column(name = "sub_abbrev")
+    private String subAbbrev;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
+    private Collection<Section> sectionCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -142,6 +150,31 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "business.Course[ courseId=" + courseId + " ]";
+    }
+
+    public String getCourseSub() {
+        return courseSub;
+    }
+
+    public void setCourseSub(String courseSub) {
+        this.courseSub = courseSub;
+    }
+
+    public String getSubAbbrev() {
+        return subAbbrev;
+    }
+
+    public void setSubAbbrev(String subAbbrev) {
+        this.subAbbrev = subAbbrev;
+    }
+
+    @XmlTransient
+    public Collection<Section> getSectionCollection() {
+        return sectionCollection;
+    }
+
+    public void setSectionCollection(Collection<Section> sectionCollection) {
+        this.sectionCollection = sectionCollection;
     }
     
 }

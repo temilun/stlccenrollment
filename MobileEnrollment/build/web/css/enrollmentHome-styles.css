@@ -140,6 +140,15 @@ h1 {
     color: white;
 }
 
+#links {
+    padding-top: 15px;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
 #disabledBtn {
     paddint-top: 50px;
     margin-top: 15px;
