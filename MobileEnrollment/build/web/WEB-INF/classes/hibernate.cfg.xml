@@ -42,9 +42,9 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:9090/stlccenrollment?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://aa14p9sg8t8pzcx.c01mp3wbbfje.us-east-2.rds.amazonaws.com:3306/stlccenrollment?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">admin</property>
-    <property name="hibernate.connection.password">Pin>run9</property>
+    <property name="hibernate.connection.password">Pin&gt;run9</property>
     <mapping class="business.Students"/>
     <mapping class="business.Advisor"/>
     <mapping class="business.Building"/>
