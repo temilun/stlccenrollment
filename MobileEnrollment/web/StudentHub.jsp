@@ -20,14 +20,14 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/MobileEnrollment";
+            window.location = "/";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
     <body>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-              <img src="./img/stlcc-logo.jpg" width="30" height="30" alt="" loading="lazy">
+            <a class="navbar-brand" href="/StudentHub.jsp">
+                <img src="./img/stlcc-logo.jpg" width="30" height="30" alt="" loading="lazy">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,7 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/MobileEnrollment/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="/Logon.jsp">Logout</a>
                   </li>
                 </ul>
             </div>
@@ -67,11 +67,16 @@
                 <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
             </div>
         </div>
-
+        
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Need more help?</div>
             <div class="card-body">
-                <p class="card-text">Your academic advisor would be happy to assist you via email or a live online meeting. To find out more information about your advisor, click <a href="#">HERE!</a></p>
+                <p class="card-text">Your academic advisor would be happy to 
+                    assist you via email or a live online meeting. To find out 
+                    more information about your advisor, click 
+                    <a href="https://stlcc.edu/admissions/advising/virtual-advising.aspx" target="_blank">
+                        HERE!
+                    </a></p>
             </div>
         </div>     
     </body>

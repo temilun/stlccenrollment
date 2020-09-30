@@ -35,7 +35,7 @@
     <c:if test="${s.authenticated}">
     <body>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/StudentHub.jsp">
               <img src="./img/stlcc-logo.jpg" width="30" height="30" alt="" loading="lazy">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,10 +50,10 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/MobileEnrollment/StudentHub.jsp">Student Hub</a>
+                      <a class="nav-link" href="/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/MobileEnrollment/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="/Logon.jsp">Logout</a>
                   </li>
                 </ul>
             </div>
