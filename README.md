@@ -5,6 +5,8 @@ This is a student group project where we are building a mobile class registratio
 #### Development environment
 The project is being built with Netbeans 8.2 and JDK 8.
 
+To run, simply download the project and ensure you have Netbeans 8.2 and JDK 8, and open the MobileEnrollment project folder.
+
 To connect to the database, make sure you ssh into the EC2 instance with your .pem key first. Without sshing in you will not be able to connect to the database.
 
 
