@@ -22,13 +22,13 @@ jobs:
           aws-region: "us-east-2"
 
       - name: Upload package to S3 bucket
-        run: aws s3 cp deploy_package.zip s3://STLCCenrollmentBeanstalk/
+        run: aws s3 cp deploy_package.zip s3://deployfromgithub/
 
       - name: Create new ElasticBeanstalk Application Version
         run: |
           aws elasticbeanstalk create-application-version \
-          --application-name MyAwesomeApp \
-          --source-bundle S3Bucket="STLCCenrollmentBeanstalk",S3Key="deploy_package.zip" \
+          --application-name STLCCenrollmentBeanstalk \
+          --source-bundle S3Bucket="deployfromgithub",S3Key="deploy_package.zip" \
           --version-label "ver-${{ github.sha }}" \
           --description "commit-sha-${{ github.sha }}"
 
