@@ -5,9 +5,7 @@ This is a student group project where we are building a mobile class registratio
 ## Development environment
 The project is being built with Netbeans 8.2 and JDK 8.
 
-To run, simply download the project and ensure you have Netbeans 8.2 and JDK 8 then open the MobileEnrollment project folder. Note - you may have to update the mysql connector driver used in NetBeans. The version we used is available [HERE](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.21.zip), download the zip and extract the jar file inside. Then replace the mysql connector driver that is used in the project.
-
-To connect to the database, make sure you ssh into the EC2 instance with your .pem key first. Without sshing in you will not be able to connect to the database.
+To run, simply download the project and ensure you have Netbeans 8.2 and JDK 8, then open the MobileEnrollment project folder. Note - you may have to update the mysql connector driver used in NetBeans. The version we used is available [HERE](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.21.zip), download the zip and extract the jar file inside then replace the mysql connector driver that is used in the project.
 
 
 ## Git Workflow
