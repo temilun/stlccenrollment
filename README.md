@@ -7,6 +7,13 @@ The project is being built with Netbeans 8.2 and JDK 8.
 
 To run, simply download the project and ensure you have Netbeans 8.2 and JDK 8, then open the MobileEnrollment project folder. Note - you may have to update the mysql connector driver used in NetBeans. The version we used is available [HERE](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.21.zip), download the zip and extract the jar file inside then replace the mysql connector driver that is used in the project.
 
+## Documentation - (Sprint 2)
+
+This web application is designed to be used by students registering for courses at STLCC. 
+
+The end goal of the application is to allow a student to sign on, filter their search, select courses they are interested in, select specific sections they want to register, add them to their 'shopping cart' and register for them.
+
+It is all web-based so any user with a modern mobile phone should be able to access it.
 
 ## Git Workflow
 
