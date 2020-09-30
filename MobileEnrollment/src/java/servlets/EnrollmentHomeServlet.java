@@ -23,28 +23,24 @@ import javax.servlet.http.HttpServletResponse;
  * @author tom
  */
 public class EnrollmentHomeServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //initializes starting variables
         String URL = "/EnrollmentHome.jsp", msg = "";
+        
+        //This is where the list of programs is stored
         List<Program> progs;
         
         try {
+            //progs = list of all programs from the database
             progs = ProgramDB.getPrograms();
             if (progs == null ) {
                 msg = "Programs returned null. <br>";
                 URL = "/StudentHub.jsp";
             } else {
+                //if progs is not null, set the session attribute of "progs"
+                //  to our list of programs
                 request.getSession().setAttribute("progs", progs);
             }
         } catch(Exception e) {

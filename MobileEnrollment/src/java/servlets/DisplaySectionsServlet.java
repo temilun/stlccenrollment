@@ -21,25 +21,27 @@ import javax.servlet.http.HttpServletResponse;
  * @author tom
  */
 public class DisplaySectionsServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "/DisplaySections.jsp", msg ="";
         List<Section> sections = null;
+
         String[] courseIDs;
+ 
+        /*
+            This servlet is currently incomplete.
+            Sections always return null in its current state.
+            I think it may have something to do with the way the Entity classes
+            are designed ( I don't think i quite have the joins correctly set up )
+        */
+        
         
         try {
             courseIDs = request.getParameterValues("checked");
+            
+            request.getSession().setAttribute("courseIDs", courseIDs);
+            
             sections = SectionDB.getSections(courseIDs);
             
             if (sections != null) {

@@ -67,13 +67,7 @@
             <div id="mainForm">
                 
                 
-                <script>
-                    //js to enable the 'display classes' button only after the
-                    //checkboxes are checked
-                    let enableBtn = () => {
-                        document.getElementById('disabledBtn').id = 'searchBtn';
-                    };
-                </script>
+                
                 <!-- this form will take input from the user to find what classes
                      are going to be searched -->
                 
@@ -81,8 +75,7 @@
                     <div class="sectionHead">
                         <h3>Sections</h3>
                         <small id="crsTip" class="form-text text-muted">
-                            Select all classes that you have interest in registering for,
-                            then hit "Display Classes"
+                            Select your classes.
                         </small>
                     </div>
                     
@@ -92,12 +85,21 @@
                     <!-- info on JSTL foreach can be found here:       -->
                     <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
                     <ul id="courseSelection" class="btn-group">
-                        <c:forEach var='section' items='${sections}'>
+                        <li>
+                            <p>${sections}</p>
+                        </li>
+                        <!-- <c:forEach var='section' items='${sections}'>
                                 <li>                                    
                                     <input id="${section.crn}" class="crsCheckbox" type="checkbox" id="${section.crn}" name="${section.crn}" value="${section.crn}" onclick="enableBtn();"/>
                                     <label class="checkLabel" for='${section.crn}'>${section.crn}</label>                                    
                                 </li>
-                        </c:forEach>
+                        </c:forEach> -->
+                                
+                        <c:forEach var='id' items='${courseIDs}'>
+                                <li>                                    
+                                    <p>${id}</p>                              
+                                </li>
+                        </c:forEach> 
                     </ul>         
                     
 

@@ -34,7 +34,7 @@ public class CourseDB {
             //EnrollmentHome.jsp OR if the course is listed under general studies
             //(program id 3 is general studies)
             //(may be temporary while we figure out a solution for showing genera studies
-            //along with 'Program' specific courses
+            //along with 'Program' specific courses)
             String qs = "FROM Course WHERE (progId = :programID OR progId = '3') ";
             
             //creates query from the String we made above

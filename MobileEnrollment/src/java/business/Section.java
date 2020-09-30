@@ -63,6 +63,7 @@ public class Section {
 
     public Section() {
         this.crn = "";
+        this.courseId = null;
     }
 
     public String getCrn() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>jar:file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/dist/MobileEnrollment.war!/WEB-INF/classes/hibernate.cfg.xml</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/web/SelectClasses.jsp</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/web/css/selectClasses-styles.css</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/src/java/business/CourseDB.java</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/src/java/servlets/SelectClassesServlet.java</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/src/java/hibernate.cfg.xml</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/web/StudentHub.jsp</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/web/DisplaySections.jsp</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/src/java/business/ProgramDB.java</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/web/Logon.jsp</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/.gitignore</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/src/java/business/SectionDB.java</file>
+            <file>file:/home/tom/NetBeansProjects/stlccenrollment/MobileEnrollment/web/EnrollmentHome.jsp</file>
+        </group>
+    </open-files>
+</project-private>

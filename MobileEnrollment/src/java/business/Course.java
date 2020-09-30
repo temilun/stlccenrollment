@@ -44,7 +44,7 @@ public class Course implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
     private Collection<Section> sectionCollection;
 
-    private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @Column(name = "course_id")

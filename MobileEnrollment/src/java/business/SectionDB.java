@@ -22,6 +22,7 @@ public class SectionDB {
         Session session = null;
         
         List<Section> sections = null;
+       
         
         try {
             //opening the hibernate section
@@ -38,6 +39,8 @@ public class SectionDB {
         } catch(Exception e) {
             sections = null;
         } finally {
+            //All hibernate sessions must be closed when you are finished
+            //Make sure to close the session
             session.close();
         }
         return sections;
