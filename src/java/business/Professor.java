@@ -5,11 +5,14 @@
  */
 package business;
 
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -20,6 +23,9 @@ import javax.persistence.Table;
 @Table(name="professor")
 
 public class Professor {
+
+    @OneToMany(mappedBy = "profId")
+    private Collection<Section> sectionCollection;
     @Id
     @Basic(optional = false)
     @Column(name = "prof_id")
@@ -71,6 +77,15 @@ public class Professor {
 
     public void setProfEmail(String profEmail) {
         this.profEmail = profEmail;
+    }
+
+    @XmlTransient
+    public Collection<Section> getSectionCollection() {
+        return sectionCollection;
+    }
+
+    public void setSectionCollection(Collection<Section> sectionCollection) {
+        this.sectionCollection = sectionCollection;
     }
 
     

@@ -6,14 +6,17 @@
 package business;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,6 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Department.findByDeptId", query = "SELECT d FROM Department d WHERE d.deptId = :deptId")
     , @NamedQuery(name = "Department.findByDeptName", query = "SELECT d FROM Department d WHERE d.deptName = :deptName")})
 public class Department implements Serializable {
+
+    @OneToMany(mappedBy = "deptId")
+    private Collection<Program> programCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,31 +63,14 @@ public class Department implements Serializable {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }    
+
+    @XmlTransient
+    public Collection<Program> getProgramCollection() {
+        return programCollection;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (deptId != null ? deptId.hashCode() : 0);
-        return hash;
+    public void setProgramCollection(Collection<Program> programCollection) {
+        this.programCollection = programCollection;
     }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Department)) {
-            return false;
-        }
-        Department other = (Department) object;
-        if ((this.deptId == null && other.deptId != null) || (this.deptId != null && !this.deptId.equals(other.deptId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "business.Department[ deptId=" + deptId + " ]";
-    }
-    
 }

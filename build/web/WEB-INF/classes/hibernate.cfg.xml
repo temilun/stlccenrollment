@@ -24,7 +24,7 @@ by Oracle in the GPL Version 2 section of the License file that
 accompanied this code. If applicable, add the following below the
 License Header, with the fields enclosed by brackets [] replaced by
 your own identifying information:
-"Portions Copyrighted [year] [name of copyright owner]"
+"Portions Copyrighted [year] [name of copyright owner]"`
 
 If you wish your version of this file to be governed by only the CDDL
 or only the GPL Version 2, indicate your decision by adding
@@ -42,9 +42,9 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:9090/stlccenrollment?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://aa14p9sg8t8pzcx.c01mp3wbbfje.us-east-2.rds.amazonaws.com:3306/stlccenrollment?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">admin</property>
-    <property name="hibernate.connection.password">Pin>run9</property>
+    <property name="hibernate.connection.password">Pin&gt;run9</property>
     <mapping class="business.Students"/>
     <mapping class="business.Advisor"/>
     <mapping class="business.Building"/>

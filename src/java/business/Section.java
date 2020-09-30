@@ -6,11 +6,16 @@
 package business;
 
 import java.sql.Time;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,12 +26,12 @@ import javax.persistence.Table;
 @Table(name="section")
 
 public class Section {
+
+
     @Id
     @Basic(optional = false)
     @Column(name = "crn")
     private String crn;
-    @Column(name = "prof_id")
-    private String profId;
     @Column(name = "days")
     private String days;
     @Column(name = "time")
@@ -37,16 +42,28 @@ public class Section {
     private String termType;
     @Column(name = "status")
     private String status;
-    @Column(name = "enroll_avail")
-    private int enrollAvail;
-    @Column(name = "enroll_tot")
-    private int enrollTot;
     @Column(name = "prereq")
     private String preReq;
+    @Column(name = "start_time")
+    @Temporal(TemporalType.TIME)
+    private Date startTime;
+    @Column(name = "end_time")
+    @Temporal(TemporalType.TIME)
+    private Date endTime;
+    @Column(name = "enroll_avail")
+    private String enrollAvail;
+    @Column(name = "enroll_tot")
+    private String enrollTot;
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
+    @ManyToOne(optional = false)
+    private Course courseId;
+    @JoinColumn(name = "prof_id", referencedColumnName = "prof_id")
+    private String profId;
     
 
     public Section() {
         this.crn = "";
+        this.courseId = null;
     }
 
     public String getCrn() {
@@ -55,14 +72,6 @@ public class Section {
 
     public void setCrn(String crn) {
         this.crn = crn;
-    }
-
-    public String getProfId() {
-        return profId;
-    }
-
-    public void setProfId(String profId) {
-        this.profId = profId;
     }
 
     public String getDays() {
@@ -105,28 +114,60 @@ public class Section {
         this.status = status;
     }
 
-    public int getEnrollAvail() {
-        return enrollAvail;
-    }
-
-    public void setEnrollAvail(int enrollAvail) {
-        this.enrollAvail = enrollAvail;
-    }
-
-    public int getEnrollTot() {
-        return enrollTot;
-    }
-
-    public void setEnrollTot(int enrollTot) {
-        this.enrollTot = enrollTot;
-    }
-
     public String getPreReq() {
         return preReq;
     }
 
     public void setPreReq(String preReq) {
         this.preReq = preReq;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getEnrollAvail() {
+        return enrollAvail;
+    }
+
+    public void setEnrollAvail(String enrollAvail) {
+        this.enrollAvail = enrollAvail;
+    }
+
+    public String getEnrollTot() {
+        return enrollTot;
+    }
+
+    public void setEnrollTot(String enrollTot) {
+        this.enrollTot = enrollTot;
+    }
+
+    public Course getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Course courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getProfId() {
+        return profId;
+    }
+
+    public void setProfId(String profId) {
+        this.profId = profId;
     }
 
     
