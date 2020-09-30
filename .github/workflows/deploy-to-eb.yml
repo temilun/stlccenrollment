@@ -28,7 +28,7 @@ jobs:
         run: |
           aws elasticbeanstalk create-application-version \
           --application-name MyAwesomeApp \
-          --source-bundle S3Bucket="my-awesome-app-deploy-andrey",S3Key="deploy_package.zip" \
+          --source-bundle S3Bucket="STLCCenrollmentBeanstalk",S3Key="deploy_package.zip" \
           --version-label "ver-${{ github.sha }}" \
           --description "commit-sha-${{ github.sha }}"
 
