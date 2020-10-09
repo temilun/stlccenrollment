@@ -88,6 +88,7 @@
                     
                     <div class="deptSelect" style="width:80%;">
                         <select id="progID" name="progID">
+                            <option value="0">Select your degree or program</option>
                             <c:forEach var='prog' items='${progs}'>
                                 <option value="${prog.progId}">${prog.progName}</option>
                             </c:forEach>    
