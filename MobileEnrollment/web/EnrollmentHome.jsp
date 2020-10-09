@@ -51,7 +51,7 @@
                       <a class="nav-link" href="/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
                   </li>
                 </ul>
             </div>

@@ -5,7 +5,9 @@
  */
 package business;
 
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name="program")
 
-public class Program {
+public class Program implements Serializable {
 
-
+    @OneToMany(mappedBy = "progId")
+    private List<Course> courseList;
+    @JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
+    @ManyToOne
+    private Department deptId;
     @Id
     @Basic(optional = false)
     @Column(name = "prog_id")
-    private String progId;
-    @Column(name = "dept_id")
-    /*@JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
-    @ManyToOne*/
-    private String deptId;    
+    private String progId; 
     @Basic(optional = false)
     @Column(name = "prog_name")
     private String progName;
@@ -45,7 +47,7 @@ public class Program {
     
     public Program() {
         this.progId = "";
-        this.deptId = "";
+        this.deptId = null;
         this.progName ="";
         this.progType = "";
     }
@@ -56,14 +58,6 @@ public class Program {
 
     public void setProgId(String progId) {
         this.progId = progId;
-    }
-
-    public String getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(String deptId) {
-        this.deptId = deptId;
     }
 
     public String getProgName() {
@@ -82,7 +76,19 @@ public class Program {
         this.progType = progType;
     }
 
+    public List<Course> getCourseList() {
+        return courseList;
+    }
 
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
 
+    public Department getDeptId() {
+        return deptId;
+    }
 
+    public void setDeptId(Department deptId) {
+        this.deptId = deptId;
+    }
 }

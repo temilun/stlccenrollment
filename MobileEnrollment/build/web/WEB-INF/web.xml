@@ -16,6 +16,14 @@
         <servlet-name>DisplaySectionsServlet</servlet-name>
         <url-pattern>/DisplaySections</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentLogonServlet</servlet-name>
+        <url-pattern>/StudentLogon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -29,6 +37,10 @@
         <servlet-class>servlets.StudentLogonServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SelectClassesServlet</servlet-name>
         <servlet-class>servlets.SelectClassesServlet</servlet-class>
     </servlet>
@@ -36,8 +48,4 @@
         <servlet-name>EnrollmentHomeServlet</servlet-name>
         <servlet-class>servlets.EnrollmentHomeServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>StudentLogonServlet</servlet-name>
-        <url-pattern>/StudentLogon</url-pattern>
-    </servlet-mapping>
 </web-app>

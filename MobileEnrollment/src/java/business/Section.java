@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,33 +34,47 @@ public class Section {
     @Basic(optional = false)
     @Column(name = "crn")
     private String crn;
+    
     @Column(name = "days")
     private String days;
-    @Column(name = "time")
-    private Time time;
+    
     @Column(name = "sec_type")
     private String secType;
+    
     @Column(name = "term_type")
     private String termType;
+    
     @Column(name = "status")
     private String status;
+    
     @Column(name = "prereq")
     private String preReq;
+    
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
     private Date startTime;
+    
     @Column(name = "end_time")
     @Temporal(TemporalType.TIME)
     private Date endTime;
+    
     @Column(name = "enroll_avail")
     private String enrollAvail;
+    
     @Column(name = "enroll_tot")
     private String enrollTot;
-    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-    @ManyToOne(optional = false)
-    private Course courseId;
+    
+    @Column(name="course_id")
+    @Basic(optional = false)
+    private String courseId;
+    
     @JoinColumn(name = "prof_id", referencedColumnName = "prof_id")
-    private String profId;
+    @ManyToOne(targetEntity = Professor.class)
+    private Professor profId;
+    
+    @JoinColumn(name = "course_id", insertable=false, updatable=false)
+    @ManyToOne(optional = false)
+    private Course course;
     
 
     public Section() {
@@ -80,14 +96,6 @@ public class Section {
 
     public void setDays(String days) {
         this.days = days;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
     }
 
     public String getSecType() {
@@ -154,20 +162,28 @@ public class Section {
         this.enrollTot = enrollTot;
     }
 
-    public Course getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Course courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 
-    public String getProfId() {
+    public Professor getProfId() {
         return profId;
     }
 
-    public void setProfId(String profId) {
+    public void setProfId(Professor profId) {
         this.profId = profId;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     

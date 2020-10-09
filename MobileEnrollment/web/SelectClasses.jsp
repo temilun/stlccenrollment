@@ -29,9 +29,9 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/MobileEnrollment/Logon.jsp";
-            </script>
-        </c:if>
+            window.location = "<%=request.getContextPath()%>/Logon.jsp";
+        </script>
+    </c:if>
     <c:if test="${s.authenticated}">
     <body>
         <nav class="navbar navbar-light bg-light">
@@ -50,10 +50,10 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/StudentHub.jsp">Student Hub</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
                   </li>
                 </ul>
             </div>

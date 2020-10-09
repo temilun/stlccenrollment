@@ -53,7 +53,7 @@
                       <a class="nav-link" href="/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
                   </li>
                 </ul>
             </div>
@@ -85,21 +85,12 @@
                     <!-- info on JSTL foreach can be found here:       -->
                     <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
                     <ul id="courseSelection" class="btn-group">
-                        <li>
-                            <p>${sections}</p>
-                        </li>
-                        <!-- <c:forEach var='section' items='${sections}'>
-                                <li>                                    
-                                    <input id="${section.crn}" class="crsCheckbox" type="checkbox" id="${section.crn}" name="${section.crn}" value="${section.crn}" onclick="enableBtn();"/>
-                                    <label class="checkLabel" for='${section.crn}'>${section.crn}</label>                                    
-                                </li>
-                        </c:forEach> -->
-                                
-                        <c:forEach var='id' items='${courseIDs}'>
-                                <li>                                    
-                                    <p>${id}</p>                              
-                                </li>
-                        </c:forEach> 
+                        
+                        <c:forEach var="section" items="${sections}">
+                            <li>
+                                <p>${section.crn} ${section.course.courseName}</p>
+                            </li>
+                        </c:forEach>
                     </ul>         
                     
 

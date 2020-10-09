@@ -24,8 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Professor {
 
-    @OneToMany(mappedBy = "profId")
-    private Collection<Section> sectionCollection;
+
     @Id
     @Basic(optional = false)
     @Column(name = "prof_id")
@@ -38,6 +37,9 @@ public class Professor {
     private String profLname;
     @Column(name = "prof_email")
     private String profEmail;
+    
+    @OneToMany(mappedBy = "profId")
+    private Collection<Section> sectionCollection;
     
 
     public Professor() {

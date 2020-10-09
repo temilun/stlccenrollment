@@ -20,7 +20,7 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/";
+            window.location = "/Logon.jsp";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
@@ -41,7 +41,7 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>
                   </li>
                 </ul>
             </div>

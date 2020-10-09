@@ -5,10 +5,12 @@
  */
 package servlets;
 
+import business.Course;
 import business.Section;
 import business.SectionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,6 +41,8 @@ public class DisplaySectionsServlet extends HttpServlet {
         
         try {
             courseIDs = request.getParameterValues("checked");
+            
+            
             
             request.getSession().setAttribute("courseIDs", courseIDs);
             
