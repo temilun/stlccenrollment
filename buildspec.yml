@@ -4,13 +4,16 @@ phases:
   install:
     runtime-versions:
       java: corretto11
-      java: openjdk8
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on 'date'
+      - mvn install
   post_build:
     commands:
-      - mvn package
-      - mv target/MobileEnrollment.war MobileEnrollment.war
+      - echo Build completed on 'date'
 artifacts:
   files:
-    - MobileEnrollment.war
-    - .ebextensions/**/*
-  base-directory: 'target/MobileEnrollment'
+    - stlccenrollment/dist/MobileEnrollment.war
