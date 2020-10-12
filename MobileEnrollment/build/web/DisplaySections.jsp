@@ -66,7 +66,13 @@
             </div>
             <div id="mainForm">
                 
-                
+                <script>
+                    //js to enable the 'display classes' button only after the
+                    //checkboxes are checked
+                    let enableBtn = () => {
+                        document.getElementById('disabledBtn').id = 'searchBtn';
+                    };
+                </script>
                 
                 <!-- this form will take input from the user to find what classes
                      are going to be searched -->
@@ -75,7 +81,7 @@
                     <div class="sectionHead">
                         <h3>Sections</h3>
                         <small id="crsTip" class="form-text text-muted">
-                            Select your classes.
+                            Select your class sections to add to your cart.
                         </small>
                     </div>
                     
@@ -87,14 +93,25 @@
                     <ul id="courseSelection" class="btn-group">
                         
                         <c:forEach var="section" items="${sections}">
-                            <li>
-                                <p>${section.crn} ${section.course.courseName}</p>
+                            <li>                                    
+                                  <input id="${section.crn}" class="crsCheckbox" type="checkbox" id="${section.crn}" name="checked" value="${section.course.courseName}" onclick="enableBtn();"/>
+                                  <label class="checkLabel" for='${section.crn}'> ${section.crn} ${section.course.courseName} ${section.days} ${section.startTime} ${section.endTime} ${section.status} ${section.enrollAvail} ${section.enrollTot}</label>                                    
                             </li>
+                            
+                        
+                            <!--<li>
+                                <p>${section.crn} ${section.course.courseName}</p>
+                            </li>-->
                         </c:forEach>
                     </ul>         
                     
-
-                    
+                        <div class="text-center">
+                            <input type="submit" value="Add selected Classes to Cart" id="disabledBtn">    
+                        </div>
+                                     
+                        <div class="text-center" id="links">
+                            <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
+                        </div> 
                     
                 </form>
             </div>
