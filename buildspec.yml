@@ -6,7 +6,12 @@ phases:
       java: corretto11
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - npm install
+      - apt-get update
+      - apt-get install -y jq
+      - wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+      - tar xzf apache-maven-3.5.4-bin.tar.gz
+      - ln -s apache-maven-3.5.4 maven
   build:
     commands:
       - echo Build started on 'date'
@@ -16,4 +21,4 @@ phases:
       - echo Build completed on 'date'
 artifacts:
   files:
-    - stlccenrollment/dist/MobileEnrollment.war
+    - MobileEnrollment.war
