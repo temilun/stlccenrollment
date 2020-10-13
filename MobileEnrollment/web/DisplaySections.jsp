@@ -29,9 +29,9 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/MobileEnrollment/Logon.jsp";
-            </script>
-        </c:if>
+            window.location = "/Logon.jsp";
+        </script>
+    </c:if>
     <c:if test="${s.authenticated}">
     <body>
         <nav class="navbar navbar-light bg-light">
