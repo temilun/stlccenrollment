@@ -1,36 +1,38 @@
-name: deploy-to-eb
+#   All  lines are commented to prevent from pushing
 
-on:
-  push:
-    branches: [ master ]
+#name: deploy-to-eb
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+#on:
+#  push:
+#    branches: [ master ]
 
-    steps:
-      - uses: actions/checkout@v2
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
 
-      - name: Create ZIP deployment package
-        run:  zip deploy_package.zip MobileEnrollment/dist/
+#    steps:
+#      - uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-region: "us-east-2"
+#      - name: Create ZIP deployment package
+#        run:  zip deploy_package.zip MobileEnrollment/dist/
 
-      - name: Upload package to S3 bucket
-        run: aws s3 cp deploy_package.zip s3://STLCCenrollmentBeanstalk/
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+#          aws-region: "us-east-2"
 
-      - name: Create new ElasticBeanstalk Application Version
-        run: |
-          aws elasticbeanstalk create-application-version \
-          --application-name stlccenrollment \
-          --source-bundle S3Bucket="STLCCenrollmentBeanstalk",S3Key="deploy_package.zip" \
-          --version-label "ver-${{ github.sha }}" \
-          --description "commit-sha-${{ github.sha }}"
+#      - name: Upload package to S3 bucket
+#        run: aws s3 cp deploy_package.zip s3://STLCCenrollmentBeanstalk/
 
-      - name: Deploy new ElasticBeanstalk Application Version
-        run: aws elasticbeanstalk update-environment --environment-name Stlccenrollmentbeanstalk-env --version-label "ver-${{ github.sha }}"
+#      - name: Create new ElasticBeanstalk Application Version
+#        run: |
+#          aws elasticbeanstalk create-application-version \
+#          --application-name stlccenrollment \
+#          --source-bundle S3Bucket="STLCCenrollmentBeanstalk",S3Key="deploy_package.zip" \
+#          --version-label "ver-${{ github.sha }}" \
+#          --description "commit-sha-${{ github.sha }}"
+
+#      - name: Deploy new ElasticBeanstalk Application Version
+#        run: aws elasticbeanstalk update-environment --environment-name Stlccenrollmentbeanstalk-env --version-label "ver-${{ github.sha }}"
