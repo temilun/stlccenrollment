@@ -69,24 +69,40 @@
                     </div>
                     <ul id="termSelection" class="btn-group">
                         <li>
-                            <input id="spring21" class="termbtn" type="radio" id="spring21" name="term" value="spring21" onclick="enableBtn();" required/>
+                            <input id="spring21" class="termbtn" type="radio" name="term" value="spring21" onclick="enableBtn();" required/>
                             <label id="termLabel" for="spring21">Spring 2021</label>
                         </li>
                         <li>
-                            <input id="summer21" class="termbtn" type="radio" id="summer21" name="term" value="summer21" onclick="enableBtn();" required/>
+                            <input id="summer21" class="termbtn" type="radio" name="term" value="summer21" onclick="enableBtn();" required/>
                             <label id="termLabel" for="summer21">Summer 2021</label>
                         </li>
                         <li>
-                            <input id="fall21" class="termbtn" type="radio" id="fall21" name="term" value="fall21" onclick="enableBtn();" required/>
+                            <input id="fall21" class="termbtn" type="radio" name="term" value="fall21" onclick="enableBtn();" required/>
                             <label id="termLabel" for="fall21">Fall 2021</label>
                         </li>
                     </ul>
+                    
+                    <div id="searchTypeDiv">
+                        <div id="sectionHead">
+                            <h3>Search Type</h3>
+                        </div>
+                        <ul>
+                            <li>
+                                <input id="progSearch" class="termbtn" type="radio" name="search" value="progSearch" onclick="progSearch();" required/>
+                                <label id="termLabel" for="progSearch">Search by Degree/Program</label>
+                            </li>
+                            <li>
+                                <input id="advSearch" class="termbtn" type="radio" name="search" value="advSearch" onclick="advSearch();" required/>
+                                <label id="termLabel" for="advSearch">Advanced Search</label>
+                            </li>
+                        </ul>
+                    </div>
                     
                     <div id="sectionHead">
                         <h3>Select Your Program</h3>
                     </div>
                     
-                    <div class="deptSelect" style="width:80%;">
+                    <div class="deptSelect" style="width:80%;" style="display: none;">
                         <select id="progID" name="progID">
                             <option value="0">Select your degree or program</option>
                             <c:forEach var='prog' items='${progs}'>

@@ -1,1 +1,19 @@
+# gitignore template partially taken from #
+# https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore #
 
+# ignores these files when making commits #
+# Netbeans specific files #
+
+MobileEnrollment/build/
+MobileEnrollment/nbproject/private/
+MobileEnrollment/dist/
+MobileEnrollment/nbuild/
+MobileEnrollment/nbdist/
+
+# class files #
+
+*.class
+
+# deployment files #
+
+*.war
