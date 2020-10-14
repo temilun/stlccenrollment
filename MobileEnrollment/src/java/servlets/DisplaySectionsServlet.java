@@ -30,7 +30,7 @@ public class DisplaySectionsServlet extends HttpServlet {
         List<Section> sections = null;
 
         String[] courseIDs;
- 
+        
         /*
             This servlet is currently incomplete.
             Sections always return null in its current state.
