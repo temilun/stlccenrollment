@@ -65,7 +65,7 @@
             <div id="mainForm">
                 <form action="SelectClasses">
                     <div  id="sectionHead">
-                        <h3>Term</h3>
+                        <h3>Select a Term</h3>
                     </div>
                     <ul id="termSelection" class="btn-group">
                         <li>

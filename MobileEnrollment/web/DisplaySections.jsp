@@ -90,47 +90,35 @@
                     <!-- to run through our list section objects -->
                     <!-- info on JSTL foreach can be found here:       -->
                     <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
-                    <ul id="courseSelection" class="btn-group">
+
+                    <div class="text-center">
                         <table border=1 align=center style="text-align:center">
-                        <thead>    
-                            <tr>
-                                <th>CRN</th>
-                                <th>Course Name</th>
-                                <th>Day</th>
-                                <th>Start Time</th>
-                                <th>Start End</th>
-                                <th>Status</th>
-                                <th>Available Slots</th>
-                                <th>Total Enrolled</th>
-                            </tr>
-                        </thead>
-                        <c:forEach var="section" items="${sections}">
-                            <li>                                    
-                                  <input id="${section.crn}" class="crsCheckbox" type="checkbox" id="${section.crn}" name="checked" value="${section.course.courseName}" onclick="enableBtn();"/>
-                                  <label class="checkLabel" for='${section.crn}'> 
-                                      
-       
-                        <tr>
-                    <td><c:out value="${section.crn}" /></td>
-                    <td><c:out value="${section.course.courseName}" /></td>
-                    <td><c:out value="${section.days}" /></td>
-                    <td><c:out value="${section.startTime}" /></td>
-                    <td><c:out value="${section.endTime}" /></td>
-                    <td><c:out value="${section.status}" /></td>
-                    <td><c:out value="${section.enrollAvail}" /></td>
-                    <td><c:out value="${section.enrollTot}" /></td>
-                        </tr>
+                            <thead>    
+                                <tr>
+                                    <th>CRN</th>
+                                    <th>Course Name</th>
+                                    <th>Day</th>
+                                    <th>Start Time</th>
+                                    <th>Start End</th>
+                                    <th>Status</th>
+                                    <th>Available Slots</th>
+                                    <th>Total Enrolled</th>
+                                </tr>
+                            </thead>
+                            <c:forEach var="section" items="${sections}">
+                                <tr>
+                                    <td>${section.crn}</td>
+                                    <td>${section.course.courseName}</td>
+                                    <td>${section.days}</td>
+                                    <td>${section.startTime}</td>
+                                    <td>${section.endTime}</td>
+                                    <td>${section.status}</td>
+                                    <td>${section.enrollAvail}</td>
+                                    <td>${section.enrollTot}</td>
+                                </tr>
+                            </c:forEach>
                         </table>
-                                     <!-- ${section.crn} ${section.course.courseName} ${section.days} ${section.startTime} ${section.endTime} ${section.status} ${section.enrollAvail} ${section.enrollTot}</label>      --!>                              
-                            </li>
-                            </tr>
-                        
-                            <!--<li>
-                                <p>${section.crn} ${section.course.courseName}</p>
-                            </li>-->
-                            </li>
-                        </c:forEach>
-                    </ul>         
+                    </div>
                     
                         <div class="text-center">
                             <input type="submit" value="Add selected Classes to Cart" id="disabledBtn">    
