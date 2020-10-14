@@ -102,7 +102,7 @@
                         <h3>Select Your Program</h3>
                     </div>
                     
-                    <div class="deptSelect" style="width:80%;" style="display: none;">
+                    <div class="deptSelect" style="width:80%;">
                         <select id="progID" name="progID">
                             <option value="0">Select your degree or program</option>
                             <c:forEach var='prog' items='${progs}'>
