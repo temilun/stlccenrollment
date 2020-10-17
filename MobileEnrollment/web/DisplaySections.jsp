@@ -99,7 +99,8 @@
                 
                   - Next another forEach loop is ran to find each section that
                     checks if there are any sections with course IDs that match with
-                    the current course ID that is being used.
+                    the current course ID that is being used. -->
+            
                 <c:forEach var="course" items="${courses}">
                     <c:forEach var="id" items="${courseIDs}">
                         <c:if test='${course.courseId eq id}'>
