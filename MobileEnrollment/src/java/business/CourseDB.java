@@ -56,4 +56,24 @@ public class CourseDB {
         }
         return courses;
     }
+//    public static List<Course> getCoursesByID(String[] courseIDs) {
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        
+//        Session session = null;
+//        
+//        List<Course> courses = null;
+//        try {
+//            
+//        } catch (Exception e) {
+//            session = sessionFactory.openSession();
+//            String qs = "FROM Course WHERE courseId = :courseIDs";
+//            Query q = session.createQuery(qs);
+//            q.setParameterList("courseIDs", courseIDs);
+//            courses = q.list();
+//        }
+//        
+//        
+//        
+//        return courses;
+//    }
 }

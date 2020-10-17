@@ -6,6 +6,7 @@
 package servlets;
 
 import business.Course;
+import business.CourseDB;
 import business.Section;
 import business.SectionDB;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class DisplaySectionsServlet extends HttpServlet {
         List<Section> sections = null;
 
         String[] courseIDs;
+        List<Course> courses;
         
         /*
             This servlet is currently incomplete.
@@ -43,8 +45,10 @@ public class DisplaySectionsServlet extends HttpServlet {
             courseIDs = request.getParameterValues("checked");
             
             
-            
+           
             request.getSession().setAttribute("courseIDs", courseIDs);
+            
+            
             
             sections = SectionDB.getSections(courseIDs);
             
@@ -56,7 +60,7 @@ public class DisplaySectionsServlet extends HttpServlet {
             }
         } catch(Exception e) {
             msg = "Display Section servlet error: " + e.getMessage();
-            URL = "/DisplaySection.jsp";
+            URL = "/DisplaySections.jsp";
         }
         
         request.setAttribute("msg", msg);
