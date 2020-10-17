@@ -64,17 +64,11 @@
         <div class="registrationContainer">
             <div>
                 <h1 id="registrationHeader">Select Sections</h1>
-                <small id="crsTip">Select up to one section from each course</small>
+                <small class="pl-3">Select up to one section from each course</small>
             </div>
-            <div id="mainForm">
+            <div id="mainForm" class="pt-3">
                 
-                <script>
-                    //js to enable the 'display classes' button only after the
-                    //checkboxes are checked
-                    let enableBtn = () => {
-                        document.getElementById('disabledBtn').id = 'searchBtn';
-                    };
-                </script>
+               
                 
                 <!-- this form will take input from the user to find what classes
                      are going to be searched -->
@@ -101,58 +95,59 @@
                     checks if there are any sections with course IDs that match with
                     the current course ID that is being used. -->
             
-                <c:forEach var="course" items="${courses}">
-                    <c:forEach var="id" items="${courseIDs}">
-                        <c:if test='${course.courseId eq id}'>
-                            <div class="sectionHead">
-                                <h3>${course.courseName}</h3>
-                            </div>
-                            <div class="text-center">
-                                <table class="table table-striped">
-                                    <thead>    
-                                        <tr>
-                                            <th>CRN</th>
-                                            <th>Day(s)</th>
-                                            <th>Time</th>
-                                            <th>Status</th>
-                                            <th>Avail.</th>
-                                            <th>Enrolled</th>
-                                        </tr>
-                                    </thead>
-                                <c:forEach var="section" items="${sections}">
-                                        <c:if test='${section.courseId eq course.courseId}'>
+                    <c:forEach var="course" items="${courses}">
+                        <c:forEach var="id" items="${courseIDs}">
+                            <c:if test='${course.courseId eq id}'>
+                                <div class="sectionHead pt-3">
+                                    <h3>${course.courseName}</h3>
+                                </div>
+                                <div class="text-center">
+                                    <table class="table table-hover table-sm">
+                                        <thead>    
                                             <tr>
-                                                <td>${section.crn}</td>
-                                                <td>${section.days}</td>
-                                                <td class="text-center">
-                                                    <fmt:formatDate type="time" timeStyle="short"  value="${section.startTime}" />
-                                                    -
-                                                    <fmt:formatDate type="time" timeStyle="short"  value="${section.endTime}" />
-                                                </td>
-                                                <td>${section.status}</td>
-                                                <td>${section.enrollAvail}</td>
-                                                <td>${section.enrollTot}</td>
+                                                <th scope="col">CRN</th>
+                                                <th scope="col">Day(s)</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Avail.</th>
+                                                <th scope="col">Prof.</th>
                                             </tr>
-                                    </c:if>
-                                </c:forEach>
-                                </table>
-                            </div>
-                        </c:if>
+                                        </thead>
+                                        <tbody>
+                                    <c:forEach var="section" items="${sections}">
+                                            <c:if test='${section.courseId eq course.courseId}'>
+
+                                                <tr>
+                                                    <td>${section.crn}</td>
+                                                    <td>${section.days}</td>
+                                                    <td class="text-center">
+                                                        <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" />
+                                                        <br>-<br>
+                                                        <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" />
+                                                    </td>
+                                                    <td>${section.status}</td>
+                                                    <td>${section.enrollAvail}</td>
+                                                    <td>${section.professor.profFname} ${section.professor.profLname}</td>
+                                                </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </c:if>
+                        </c:forEach>
                     </c:forEach>
-                </c:forEach>
                             
                             
             </div>
                         
-                        <div class="text-center">
-                            <input type="submit" value="Add selected Classes to Cart" id="disabledBtn">    
-                        </div>
-                                     
-                        <div class="text-center" id="links">
-                            <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
-                        </div> 
-                    
-                </form>
+            <div class="text-center">
+                <input type="submit" value="Add Selected Sections to Cart" id="disabledBtn">    
+            </div>
+
+            <div class="text-center" id="links">
+                <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
+            </div> 
             </div>
         ${msg}
     </body>

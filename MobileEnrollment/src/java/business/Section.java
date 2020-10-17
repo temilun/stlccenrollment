@@ -76,6 +76,10 @@ public class Section {
     @ManyToOne(optional = false)
     private Course course;
     
+    @JoinColumn(name = "prof_id", insertable=false, updatable=false)
+    @ManyToOne(optional = false)
+    private Professor professor;
+    
 
     public Section() {
         this.crn = "";
@@ -184,6 +188,14 @@ public class Section {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     
