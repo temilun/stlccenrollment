@@ -8,12 +8,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
  <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="./css/selectClasses-styles.css" />
+        <link rel="stylesheet" type="text/css" href="./css/selectSections-styles.css" />
         <link rel="icon" href="./img/stlcc-logo.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Karla&family=Rubik&display=swap" rel="stylesheet"> 
@@ -21,7 +23,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        
+        <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
         
         <title>Enrollment Home - Search for classes</title>
         </style>
@@ -61,77 +63,96 @@
         
         <div class="registrationContainer">
             <div>
-                <h1 id="registrationHeader">Select Classes</h1>
-                <hr>
+                <h1 id="registrationHeader">Select Sections</h1>
+                <small class="pl-3">Select up to one section from each course</small>
             </div>
-            <div id="mainForm">
+            <div id="mainForm" class="pt-3">
                 
-                <script>
-                    //js to enable the 'display classes' button only after the
-                    //checkboxes are checked
-                    let enableBtn = () => {
-                        document.getElementById('disabledBtn').id = 'searchBtn';
-                    };
-                </script>
+               
                 
                 <!-- this form will take input from the user to find what classes
                      are going to be searched -->
                 
-                <form action="DisplayClasses">
-                    <div class="sectionHead">
-                        <h3>Sections</h3>
-                        <small id="crsTip" class="form-text text-muted">
-                            Select your class sections to add to your cart.
-                        </small>
-                    </div>
+                <form action="AddToCart">                    
+                  
                     
-                    <!-- This is where the sections are displayed -->
-                    <!-- A 'for each' loop is ran with the JSTL library-->
-                    <!-- to run through our list section objects -->
-                    <!-- info on JSTL foreach can be found here:       -->
-                    <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
+            <!--    The way I have set this up is pretty messy and definitely
+                    confusing. I will try to explain what's happening:
+                
+                  - For each course in our list of courses pinned to the session
+                    (when using 'search by program' all courses in the 'program'
+                    are the courses pinned to the session), check to see if any
+                    of the course IDs that the user selected match
+                
+                  - If a course matches one of the IDs that the user selected on
+                    the previous page, create a heading for that course.
+                
+                  - After the heading is created, a table is made and table headings are
+                    filled with the titles of each column (Course name is omitted
+                    as it is being displayed above the table)
+                
+                  - Next another forEach loop is ran to find each section that
+                    checks if there are any sections with course IDs that match with
+                    the current course ID that is being used. -->
+            
+                    <c:forEach var="course" items="${courses}">
+                        <c:forEach var="id" items="${courseIDs}">
+                            <c:if test='${course.courseId eq id}'>
+                                <div class="sectionHead pt-3">
+                                    <h3>${course.courseName}</h3>
+                                </div>
+                                <div class="text-center">
+                                    <table class="table table-hover table-sm">
+                                        <thead>    
+                                            <tr>
+                                                <th scope="col"><i class="fas fa-check"></i></th>
+                                                <th scope="col">CRN</th>
+                                                <th scope="col">Day(s)</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Avail.</th>
+                                                <th scope="col">Prof.</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    <c:forEach var="section" items="${sections}">
+                                            <c:if test='${section.courseId eq course.courseId}'>
 
-                    <div class="text-center">
-                        <table border=1 align=center style="text-align:center">
-                            <thead>    
-                                <tr>
-                                    <th>CRN</th>
-                                    <th>Course Name</th>
-                                    <th>Day</th>
-                                    <th>Start Time</th>
-                                    <th>Start End</th>
-                                    <th>Status</th>
-                                    <th>Available Slots</th>
-                                    <th>Total Enrolled</th>
-                                </tr>
-                            </thead>
-                            <c:forEach var="section" items="${sections}">
-                                <tr>
-                                    <td>${section.crn}</td>
-                                    <td>${section.course.courseName}</td>
-                                    <td>${section.days}</td>
-                                    <td>${section.startTime}</td>
-                                    <td>${section.endTime}</td>
-                                    <td>${section.status}</td>
-                                    <td>${section.enrollAvail}</td>
-                                    <td>${section.enrollTot}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </div>
-                    
-                        <div class="text-center">
-                            <input type="submit" value="Add selected Classes to Cart" id="disabledBtn">    
-                        </div>
-                                     
-                        <div class="text-center" id="links">
-                            <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
-                        </div> 
-                    
-                </form>
+                                                <tr onclick="selectRow(${section.crn})">
+                                                    <td><input type="radio" name="${section.courseId}" id="${section.crn}" value="${section.crn}"</td>
+                                                    <td>${section.crn}</td>
+                                                    <td>${section.days}</td>
+                                                    <td class="text-center">
+                                                        <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" />
+                                                        <br>-<br>
+                                                        <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" />
+                                                    </td>
+                                                    <td>${section.status}</td>
+                                                    <td>${section.enrollAvail}</td>
+                                                    <td>${section.professor.profFname} ${section.professor.profLname}</td>
+                                                </tr>
+                                        </c:if>
+                                    </c:forEach>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </c:forEach>
+                            
+                            
             </div>
-        </div>
+                        
+            <div class="text-center">
+                <input type="submit" value="Add Selected Sections to Cart" id="disabledBtn">    
+            </div>
+
+            <div class="text-center" id="links">
+                <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
+            </div> 
+            </div>
         ${msg}
+        <script src="./js/displaySections.js"></script>
     </body>
     </c:if>
 </html>

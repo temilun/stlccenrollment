@@ -1,12 +1,46 @@
+
+
+//getting the div elements where our search fields are stored
+var searchTypeDiv = document.getElementById('searchTypeDiv');
+var deptDiv = document.getElementById('deptDiv');
+var advDiv  = document.getElementById('advDiv');
+
+//functions to show/hide the search fields
+
+let showSearchTypeDiv = () => {
+    searchTypeDiv.style.display = 'block';
+};
+
+let showAdvSearch = () => {
+    deptDiv.style.display = 'none';
+    advDiv.style.display = 'block';
+};
+
+
+let showProgs = () => {
+    advDiv.style.display = 'none';
+    deptDiv.style.display = 'block';
+};
+
+//Enabling button only after a department is selected
+
+
+//function to enable the "search for classes" button, only after
+//a radio button has been selected - uses html id's and css to change
+//button styling
+
+let enableBtn = () => {
+    document.getElementById('disabledBtn').id = 'searchBtn';
+};
+
+
 /* 
- * Description: This allows the styling for the custom dropdown select on the EnrollmentHome.jsp page
+ * This funciton allows the styling for the custom dropdown select on the EnrollmentHome.jsp page
  * All of this code was taken from: https://www.w3schools.com/howto/howto_custom_select.asp
  */
-
-
 window.addEventListener('load', function () {
     var x, i, j, l, ll, selElmnt, a, b, c;
-    /* Look for any elements with the class "deptSelect": */
+    /* Look for any elements with the class "Selector": */
     x = document.getElementsByClassName("deptSelect");
     l = x.length;
     for (i = 0; i < l; i++) {
@@ -85,15 +119,14 @@ window.addEventListener('load', function () {
     /* If the user clicks anywhere outside the select box,
     then close all select boxes: */
     document.addEventListener("click", closeAllSelect); 
-    
-    
 });
 
+//let deptDiv = document.getElementById("deptDiv");
+//
+//deptDiv.hidden=true;
+//
+//let showProgs = () => {
+//    deptDiv.style.display = "block";
+//};
 
-//function to enable the "search for classes" button, only after
-//a radio button has been selected - uses html id's and css to change
-//button styling
 
-let enableBtn = () => {
-        document.getElementById('disabledBtn').id = 'searchBtn';
-};

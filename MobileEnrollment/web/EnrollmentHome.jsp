@@ -19,8 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-        
-        <script src="./js/enrollmentHome.js"></script>
+       
         <title>Enrollment Home - Search for classes</title>
         </style>
 
@@ -67,49 +66,58 @@
                     <div  id="sectionHead">
                         <h3>Select a Term</h3>
                     </div>
-                    <ul id="termSelection" class="btn-group">
+                    <ul id="termSelection" class="btn-group pb-4">
                         <li>
-                            <input id="spring21" class="termbtn" type="radio" name="term" value="spring21" onclick="enableBtn();" required/>
+                            <input id="spring21" class="termbtn" type="radio" name="term" value="spring21" onclick="showSearchTypeDiv();" required/>
                             <label id="termLabel" for="spring21">Spring 2021</label>
                         </li>
                         <li>
-                            <input id="summer21" class="termbtn" type="radio" name="term" value="summer21" onclick="enableBtn();" required/>
+                            <input id="summer21" class="termbtn" type="radio" name="term" value="summer21" onclick="showSearchTypeDiv();" required/>
                             <label id="termLabel" for="summer21">Summer 2021</label>
                         </li>
                         <li>
-                            <input id="fall21" class="termbtn" type="radio" name="term" value="fall21" onclick="enableBtn();" required/>
+                            <input id="fall21" class="termbtn" type="radio" name="term" value="fall21" onclick="showSearchTypeDiv();" required/>
                             <label id="termLabel" for="fall21">Fall 2021</label>
                         </li>
                     </ul>
                     
-                    <div id="searchTypeDiv">
+                    <div id="searchTypeDiv" class="pb-4" style="display: none;">
                         <div id="sectionHead">
                             <h3>Search Type</h3>
                         </div>
                         <ul>
                             <li>
-                                <input id="progSearch" class="termbtn" type="radio" name="search" value="progSearch" onclick="progSearch();" required/>
+                                <input id="progSearch" class="termbtn" type="radio" name="search" value="progSearch" onclick="showProgs(); enableBtn();" required/>
                                 <label id="termLabel" for="progSearch">Search by Degree/Program</label>
                             </li>
                             <li>
-                                <input id="advSearch" class="termbtn" type="radio" name="search" value="advSearch" onclick="advSearch();" required/>
+                                <input id="advSearch" class="termbtn" type="radio" name="search" value="advSearch" onclick="showAdvSearch(); enableBtn();" required/>
                                 <label id="termLabel" for="advSearch">Advanced Search</label>
                             </li>
                         </ul>
                     </div>
                     
-                    <div id="sectionHead">
-                        <h3>Select Your Program</h3>
+                    <div id="deptDiv" style="display: none;" class="pb-4">
+                        <div id="sectionHead">
+                            <h3>Search by Degree/Certificate</h3>
+                            <small class="form-text text-muted pb-1">Please select your Degree/Certificate program from the dropdown.</small>
+                        </div>
+                        <div class="deptSelect" style="width:80%;">
+                            <select id="progID" name="progID">
+                                <option value="0">Select your degree or program</option>
+                                <c:forEach var='prog' items='${progs}'>
+                                    <option value="${prog.progId}">${prog.progName}</option>
+                                </c:forEach>    
+                            </select>
+                        </div>
+                    </div>
+                   
+                    <div id="advDiv" style="display: none;" class="pb-4">
+                        <div id="sectionHead">
+                            <h3>Advanced Search</h3>
+                        </div>
                     </div>
                     
-                    <div class="deptSelect" style="width:80%;">
-                        <select id="progID" name="progID">
-                            <option value="0">Select your degree or program</option>
-                            <c:forEach var='prog' items='${progs}'>
-                                <option value="${prog.progId}">${prog.progName}</option>
-                            </c:forEach>    
-                        </select>
-                    </div>
                     <div class="text-center">
                         <input type="submit" value="Search for courses" id="disabledBtn">    
                     </div>                    
@@ -120,6 +128,7 @@
             <a href="./StudentHub.jsp">Back to Student Hub</a>
         </div>
         ${msg}
+        <script src="./js/enrollmentHome.js"></script>
     </body>
     </c:if>
 </html>
