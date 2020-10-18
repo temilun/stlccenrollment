@@ -22,6 +22,17 @@
     color: #1d3d70;
 }
 
+.sectionHeadBtn {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #1d3d70;
+    background: none!important;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
 .checkLabel {
     font-family: 'Rubik', sans-serif;
     font-size: 18px;
