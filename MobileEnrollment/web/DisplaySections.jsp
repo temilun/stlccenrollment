@@ -100,6 +100,10 @@
                             <c:if test='${course.courseId eq id}'>
                                 <div class="sectionHead pt-3">
                                     <h3>${course.courseName}</h3>
+                                    <!-- This button links to the popup ( code for the popup is below the table code) -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Course Info 
+                                    </button>
                                 </div>
                                 <div class="text-center">
                                     <table class="table table-hover table-sm">
@@ -117,7 +121,6 @@
                                         <tbody>
                                     <c:forEach var="section" items="${sections}">
                                             <c:if test='${section.courseId eq course.courseId}'>
-
                                                 <tr onclick="selectRow(${section.crn})">
                                                     <td><input type="radio" name="${section.courseId}" id="${section.crn}" value="${section.crn}"</td>
                                                     <td>${section.crn}</td>
@@ -135,6 +138,25 @@
                                     </c:forEach>
                                     </tbody>
                                     </table>
+                                </div> 
+                                <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ...
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </c:if>
                         </c:forEach>
