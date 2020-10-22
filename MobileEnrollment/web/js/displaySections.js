@@ -24,7 +24,7 @@ let selectRow = (crn) => {
 //checks all inputs to see if any radio buttons are checked
 let isRadioChecked = () => {
     let radios = document.getElementsByTagName('input');
-    for (i = 0; i < radios.length; i++) {
+    for (let i = 0; i < radios.length; i++) {
         if (radios[i].type === 'radio' && radios[i].checked) {
             return true;
         }
