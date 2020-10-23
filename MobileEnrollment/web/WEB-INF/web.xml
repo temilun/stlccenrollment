@@ -4,6 +4,10 @@
         <servlet-name>DisplaySectionsServlet</servlet-name>
         <servlet-class>servlets.DisplaySectionsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <servlet-class>servlets.AddToCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SelectClassesServlet</servlet-name>
         <url-pattern>/SelectClasses</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCartServlet</servlet-name>
+        <url-pattern>/AddToCart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
