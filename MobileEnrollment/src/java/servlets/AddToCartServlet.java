@@ -43,7 +43,6 @@ public class AddToCartServlet extends HttpServlet {
         
         try {
             courseIDs = (String[]) request.getSession().getAttribute("courseIDs");
-
             for (String id : courseIDs) {
                 String crn = request.getParameter(id);
                 if (crn != null) {
@@ -60,9 +59,9 @@ public class AddToCartServlet extends HttpServlet {
                 sections.addAll(existingSections);
             }
             
-            for ( Section section : sections ) {
-                
-            }
+//            for ( Section section : sections ) {
+//                
+//            }
             
             if ( sections != null ) {
                 request.getSession().setAttribute("cartSections", sections);
