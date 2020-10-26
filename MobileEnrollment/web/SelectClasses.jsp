@@ -24,9 +24,8 @@
         
         
         <title>Enrollment Home - Search for classes</title>
-        </style>
-
     </head>
+    
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
             window.location = "<%=request.getContextPath()%>/Logon.jsp";
