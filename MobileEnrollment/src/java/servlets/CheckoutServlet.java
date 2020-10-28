@@ -10,12 +10,9 @@ import business.EnrollDB;
 import business.Section;
 import business.Students;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -68,9 +65,9 @@ public class CheckoutServlet extends HttpServlet {
                 for (Enroll e : enrollList) {
                     boolean enrAdded = EnrollDB.persistSection(e);
                     if (enrAdded) {
-                        msg += "Class " + e.getCrn() + " added.<br>"; 
+                        msg += "CRN " + e.getCrn() + " Registered.<br>"; 
                     } else {
-                        msg += "Class " + e.getCrn() + " not added.<br>";
+                        msg += "Already registered for CRN " + e.getCrn() + ".<br>";
                     }
                 }
                 request.getSession().setAttribute("enrollList", enrollList);

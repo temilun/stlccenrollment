@@ -7,6 +7,7 @@ package business;
 
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,20 +29,25 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name="enroll")
 public class Enroll {
+    
+    
     @Column(name = "crn")
     @Basic(optional = false)
     private String crn;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    //@OneToOne(fetch = FetchType.EAGER)
+    
     @JoinColumn(name = "crn", insertable = false, updatable = false)
+    @OneToOne(optional = false)
     private Section section;
     
     @Column(name = "stu_id")
     @Basic(optional = false)
     private String stuId;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "stu_ID", insertable = false, updatable = false)
+    //@OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "stu_id", insertable = false, updatable = false)
+    @OneToOne(optional = false)
     private Students student;
     
     @Column(name = "enroll_date")
@@ -52,6 +60,13 @@ public class Enroll {
     @Basic(optional = false)
     private int receipt;
 
+    public Enroll() {
+        this.crn = "";
+        this.enrollDate = null;
+        this.stuId = "";
+    }
+    
+    
     public String getCrn() {
         return crn;
     }
