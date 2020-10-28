@@ -12,6 +12,10 @@
         <servlet-name>CheckoutServlet</servlet-name>
         <servlet-class>servlets.CheckoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteSectionServlet</servlet-name>
+        <servlet-class>servlets.DeleteSectionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SelectClassesServlet</servlet-name>
         <url-pattern>/SelectClasses</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/CheckoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSectionServlet</servlet-name>
+        <url-pattern>/DeleteSection</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -61,7 +61,7 @@
         <div class="registrationContainer">
             <div>
                 <h1 id="registrationHeader">Shopping Cart - Checkout</h1>
-                <small class="pl-3">Review your courses</small>
+                <small class="pl-3">Review your courses and checkout</small>
             </div>
             <div id="mainForm" class="pt-3">
                 
@@ -71,22 +71,22 @@
                         <tr>
                             <th scope="col">CRN</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Course Info</th>
+                            <th scope="col" class="text-center">Course Info</th>
                             <th scope="col">Delete</th>
                         </tr>
                         <c:forEach var="section" items="${cartSections}">
                             <tr>
                                 <td>${section.crn}</td>
                                 <td>${section.course.courseName}</td>
-                                <td><i class="fas fa-info-circle"</td>
-                                <td style="text-align:right"><i class="fas fa-trash-alt"></i></td>
+                                <td class="text-center"><i class="fas fa-info-circle"</td>
+                                <td style="text-align:right"><a href="<%=request.getContextPath()%>/DeleteSection?delete=${section.crn}"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         </c:forEach>
                     </table>
                     
                     
                     <div class="text-center">
-                        <input type="submit" value="Register for sections in cart" id="searchBtn">    
+                        <input type="submit" value="Checkout" id="searchBtn">    
                     </div>
                 </form>  
 

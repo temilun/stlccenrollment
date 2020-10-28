@@ -64,9 +64,9 @@
         </div>
             
         <c:if test="${not empty msg}">
-            <div class="card bg-light mb-3 mx-auto info">
-                <div class="card-header">Notification</div>
-                <div class="card-body">
+            <div class="card border-success mb-3 mx-auto info">
+                <div class="card-header text-success">Notification</div>
+                <div class="card-body text-success">
                     <p class="card-text">${msg}</p>
                 </div>
             </div>  
