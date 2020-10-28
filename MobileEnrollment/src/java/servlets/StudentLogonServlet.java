@@ -30,7 +30,7 @@ public class StudentLogonServlet extends HttpServlet {
             if (s == null){
                 msg = "No student record retrieved <br>";
             } else {
-                msg = "Student "+ s.getStuFname() +  s.getStuLname() + " found.";
+                //msg = "Student " + s.getStuFname() + " " + s.getStuLname() + " found.";
                 passatt = String.valueOf(request.getParameter("password").trim());
                 s.setPassAttempt(passatt);
                 if (!s.isAuthenticated()) {

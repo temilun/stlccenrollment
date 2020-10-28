@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,22 +39,24 @@ public class CheckoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String URL = "/cart.jsp";
+        String URL = "/Cart.jsp";
         String msg = "";
         Students s = new Students();
         Enroll enr = new Enroll();
         List<Section> secs = null;
         List<Enroll> enrollList = new ArrayList();
         
+        
         try {
             secs = (List<Section>)request.getSession().getAttribute("cartSections");
             s = (Students)request.getSession().getAttribute("s");
             String stu_id = s.getStuId();
+            
             for (Section i : secs) {
+                enr = new Enroll();
                 enr.setCrn(i.getCrn());
                 enr.setStuId(s.getStuId());
                 enr.setEnrollDate(new Date());
-                enr.setReceipt(Instant.now().getEpochSecond());
                 enrollList.add(enr);
             }
         } catch (Exception e) {
@@ -65,13 +68,15 @@ public class CheckoutServlet extends HttpServlet {
                 for (Enroll e : enrollList) {
                     boolean enrAdded = EnrollDB.persistSection(e);
                     if (enrAdded) {
-                        msg += "Class " + enr.getCrn() + " added.<br>";
-                        
+                        msg += "Class " + e.getCrn() + " added.<br>"; 
                     } else {
-                         msg += "Class " + enr.getCrn() + " not added.<br>";
-                        }
+                        msg += "Class " + e.getCrn() + " not added.<br>";
+                    }
                 }
                 request.getSession().setAttribute("enrollList", enrollList);
+                
+                URL = "/StudentHub.jsp";
+                request.getSession().setAttribute("cartSections", new ArrayList());
             } 
         } catch (Exception e) {
             msg += "CheckOutServlet Error: " + e.getMessage() + "<br>";

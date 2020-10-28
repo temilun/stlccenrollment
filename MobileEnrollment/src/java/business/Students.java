@@ -80,17 +80,21 @@ public class Students implements Serializable {
     private Collection<Transcript> transcriptCollection;
 
     public Students() {
+        this.stuFname = "";
+        this.stuLname = "";
+        this.stuId = "";
+        this.password = "";
     }
-
-    public Students(String stuId) {
-        this.stuId = stuId;
-    }
-
-    public Students(String stuId, String stuFname, String stuLname) {
-        this.stuId = stuId;
-        this.stuFname = stuFname;
-        this.stuLname = stuLname;
-    }
+//
+//    public Students(String stuId) {
+//        this.stuId = stuId;
+//    }
+//
+//    public Students(String stuId, String stuFname, String stuLname) {
+//        this.stuId = stuId;
+//        this.stuFname = stuFname;
+//        this.stuLname = stuLname;
+//    }
 
     public String getStuId() {
         return stuId;
