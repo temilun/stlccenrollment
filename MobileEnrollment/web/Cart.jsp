@@ -22,7 +22,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
         
-        <title>Enrollment Home - Search for classes</title>
+        <title>Checkout</title>
         </style>
 
     </head>
@@ -66,7 +66,7 @@
             <div id="mainForm" class="pt-3">
                 
                 
-                <form action="Register">
+                <form action="CheckoutServlet">
                     <table class="table table-hover">
                         <tr>
                             <th scope="col">CRN</th>
@@ -86,7 +86,7 @@
                     
                     
                     <div class="text-center">
-                        <input type="submit" value="Register for sections in cart" id="disabledBtn">    
+                        <input type="submit" value="Register for sections in cart" id="searchBtn">    
                     </div>
                 </form>  
 
