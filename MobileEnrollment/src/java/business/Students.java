@@ -35,8 +35,8 @@ public class Students implements Serializable {
     private String stuInitial;
     @Column(name = "phone")
     private String phone;
-    @OneToMany(mappedBy = "stuId")
-    private Collection<Enroll> enrollCollection;
+//    @OneToMany(mappedBy = "stuId")
+//    private Collection<Enroll> enrollCollection;
 
     private static final long serialVersionUID = 1L;
     @Id

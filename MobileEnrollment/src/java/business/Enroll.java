@@ -27,27 +27,30 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "enroll")
-@NamedQueries({
-    @NamedQuery(name = "Enroll.findAll", query = "SELECT e FROM Enroll e")})
+//@NamedQueries({
+//    @NamedQuery(name = "Enroll.findAll", query = "SELECT e FROM Enroll e")})
 public class Enroll implements Serializable {
-
-    private static final long serialVersionUID = 1L;
     @Column(name = "enroll_date")
     @Temporal(TemporalType.DATE)
     private Date enrollDate;
+    
     @Id
     @Basic(optional = false)
     @Column(name = "receipt")
     private Long receipt;
+    
     @JoinColumn(name = "crn", referencedColumnName = "crn")
     @ManyToOne
     private String crn;
+    
     @JoinColumn(name = "stu_id", referencedColumnName = "stu_id")
     @ManyToOne
     private String stuId;
+    
     @OneToOne (fetch=FetchType.EAGER)
     @JoinColumn (name="stu_id",insertable=false,updatable=false)
     private Students student;
+    
     @OneToOne (fetch=FetchType.EAGER)
     @JoinColumn (name="crn", insertable=false,updatable=false)
     private Section section;
@@ -81,7 +84,7 @@ public class Enroll implements Serializable {
     }
 
     public void setCrn(String crn) {
-        this.setCrn(crn);
+        this.crn = crn;
     }
 
     public String getStuId() {
@@ -89,7 +92,7 @@ public class Enroll implements Serializable {
     }
 
     public void setStuId(String stuId) {
-        this.setStuId(stuId);
+        this.stuId = stuId;
     }
 
     public Students getStudent() {

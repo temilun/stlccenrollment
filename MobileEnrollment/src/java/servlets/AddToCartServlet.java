@@ -59,9 +59,6 @@ public class AddToCartServlet extends HttpServlet {
                 sections.addAll(existingSections);
             }
             
-//            for ( Section section : sections ) {
-//                
-//            }
             
             if ( sections != null ) {
                 request.getSession().setAttribute("cartSections", sections);
