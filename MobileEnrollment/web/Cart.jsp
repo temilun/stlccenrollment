@@ -78,7 +78,37 @@
                             <tr>
                                 <td>${section.crn}</td>
                                 <td>${section.course.courseName}</td>
-                                <td class="text-center"><i class="fas fa-info-circle"</td>
+                                <td>
+                                    <!-- Jon did this part -->
+                                    <!-- This button links to the popup ( code for the popup is right below this button ) -->
+                                    <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${section.course.courseId}">
+                                       <i class="fas fa-info-circle fa-sm"></i>
+                                    </button>
+                                </td>
+                                
+                                <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
+
+                                <div class="modal fade" id="Modal${section.course.courseId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">${section.course.courseName}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>${section.course.courseName}</h3>
+                                                <p>${section.course.courseDesc}</p>
+                                                <h5>Credit Hours: ${section.course.courseCredit}</h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>          
+
                                 <td style="text-align:right"><a href="<%=request.getContextPath()%>/DeleteSection?delete=${section.crn}"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                         </c:forEach>
