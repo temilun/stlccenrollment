@@ -78,6 +78,7 @@
                             <tr>
                                 <td>${section.crn}</td>
                                 <td>${section.course.courseName}</td>
+<<<<<<< HEAD
                                 <td>
                                     <!-- Jon did this part -->
                                     <!-- This button links to the popup ( code for the popup is right below this button ) -->
@@ -87,33 +88,77 @@
                                 </td>
                                 
                                  <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
+=======
+                                <td style="text-align: center">
+                                    <!-- Jon did this part -->
+                                    <!-- This button links to the popup ( code for the popup is right below this button ) -->
+                                    <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${section.course.courseId}">
+                                       <i class="fas fa-info-circle fa-sm" style="padding-top:-20px;"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align:right"><a href="<%=request.getContextPath()%>/DeleteSection?delete=${section.crn}"><i class="fas fa-trash-alt"></i></a></td>
+                            </tr>
+                            <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
+
+>>>>>>> 8ce115025231e5d8035902a9d1da0b636d3467e8
                                 <div class="modal fade" id="Modal${section.course.courseId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
+<<<<<<< HEAD
                                                 <h5 class="modal-title" id="exampleModalLongTitle">${section.course.courseName}</h5>
+=======
+                                                <h3 class="modal-title" id="exampleModalLongTitle">${section.course.courseName}</h3>
+>>>>>>> 8ce115025231e5d8035902a9d1da0b636d3467e8
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+<<<<<<< HEAD
                                                 <h3>${section.course.courseName}</h3>
                                                 <p>${section.course.courseDesc}</p>
                                                 <h5>Credit Hours: ${section.course.courseCredit}</h5>
+=======
+                                                <p>${section.course.courseDesc}</p>
+                                                <h4><strong>Section Information:</strong></h4>
+                                                <h6>Course Code: ${section.course.subAbbrev} ${section.course.courseLevel}</h6>
+                                                <h6>CRN: ${section.crn}</h6>
+                                                <h6>Professor: ${section.professor.profFname} ${section.professor.profLname}</h6>
+                                                <h6>Days of the week: ${section.days}</h6>
+                                                <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
+                                                <h6>Credit Hours: ${section.course.courseCredit}</h6>
+>>>>>>> 8ce115025231e5d8035902a9d1da0b636d3467e8
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
+<<<<<<< HEAD
                                 </div>
                             
                                 <td style="text-align:right"><a href="<%=request.getContextPath()%>/DeleteSection?delete=${section.crn}"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
+=======
+                                </div> 
+>>>>>>> 8ce115025231e5d8035902a9d1da0b636d3467e8
                         </c:forEach>
                     </table>
                     
                     
+<<<<<<< HEAD
+=======
+                    <c:if test="${not empty msg}">
+                        <div class="card border-success mb-3 mx-auto info" style="width: 80%;">
+                            <div class="card-header text-success">Notification</div>
+                            <div class="card-body text-success">
+                                <p class="card-text">${msg}</p>
+                            </div>
+                        </div>  
+                    </c:if>
+                    
+>>>>>>> 8ce115025231e5d8035902a9d1da0b636d3467e8
                     <div class="text-center">
                         <input type="submit" value="Checkout" id="searchBtn">    
                     </div>
@@ -123,8 +168,15 @@
                 <div class="text-center" id="links">
                     <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
                 </div> 
+<<<<<<< HEAD
             </div>
         ${msg}
+=======
+                
+                
+            </div>
+        
+>>>>>>> 8ce115025231e5d8035902a9d1da0b636d3467e8
         <script src="./js/displaySections.js"></script>
     </body>
     </c:if>

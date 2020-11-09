@@ -7,6 +7,8 @@
 //selects row's radio button by clicking row. if button is already selected,
 //the row will be unchecked and isRadioChecked() is ran to see if any other buttons
 //are selected. if none are selected, the add to cart button is disabled
+let checked;
+
 let selectRow = (crn) => {
     row = document.getElementById(crn);
     if (row.checked === false) {
@@ -17,7 +19,7 @@ let selectRow = (crn) => {
         if (isRadioChecked() === false) {
             disableBtn();
         }
-    }
+    };
 };
 
 

@@ -31,6 +31,13 @@ import org.hibernate.annotations.NamedQuery;
 
 public class Students implements Serializable {
 
+    @Column(name = "stu_initial")
+    private String stuInitial;
+    @Column(name = "phone")
+    private String phone;
+//    @OneToMany(mappedBy = "stuId")
+//    private Collection<Enroll> enrollCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -46,8 +53,6 @@ public class Students implements Serializable {
     private String stuEmail;
     @Column(name = "password")
     private String password;
-    @Column(name = "stu_initial")
-    private Character stuInitial;
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
@@ -59,8 +64,6 @@ public class Students implements Serializable {
     private String state;
     @Column(name = "zipcode")
     private Integer zipcode;
-    @Column(name = "phone")
-    private Integer phone;
     @Column(name = "username")
     private String username;
     
@@ -77,17 +80,21 @@ public class Students implements Serializable {
     private Collection<Transcript> transcriptCollection;
 
     public Students() {
+        this.stuFname = "";
+        this.stuLname = "";
+        this.stuId = "";
+        this.password = "";
     }
-
-    public Students(String stuId) {
-        this.stuId = stuId;
-    }
-
-    public Students(String stuId, String stuFname, String stuLname) {
-        this.stuId = stuId;
-        this.stuFname = stuFname;
-        this.stuLname = stuLname;
-    }
+//
+//    public Students(String stuId) {
+//        this.stuId = stuId;
+//    }
+//
+//    public Students(String stuId, String stuFname, String stuLname) {
+//        this.stuId = stuId;
+//        this.stuFname = stuFname;
+//        this.stuLname = stuLname;
+//    }
 
     public String getStuId() {
         return stuId;
@@ -127,14 +134,6 @@ public class Students implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Character getStuInitial() {
-        return stuInitial;
-    }
-
-    public void setStuInitial(Character stuInitial) {
-        this.stuInitial = stuInitial;
     }
 
     public Date getBirthdate() {
@@ -177,13 +176,6 @@ public class Students implements Serializable {
         this.zipcode = zipcode;
     }
 
-    public Integer getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Integer phone) {
-        this.phone = phone;
-    }
 
     public String getUsername() {
         return username;
@@ -230,5 +222,29 @@ public class Students implements Serializable {
     public void setTranscriptCollection(Collection<Transcript> transcriptCollection) {
         this.transcriptCollection = transcriptCollection;
     }
+
+    public String getStuInitial() {
+        return stuInitial;
+    }
+
+    public void setStuInitial(String stuInitial) {
+        this.stuInitial = stuInitial;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /*public Collection<Enroll> getEnrollCollection() {
+        return enrollCollection;
+    }
+
+    public void setEnrollCollection(Collection<Enroll> enrollCollection) {
+        this.enrollCollection = enrollCollection;
+    } */
     
 }
