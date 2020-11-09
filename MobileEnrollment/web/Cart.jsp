@@ -118,6 +118,15 @@
                     </table>
                     
                     
+                    <c:if test="${not empty msg}">
+                        <div class="card border-success mb-3 mx-auto info" style="width: 80%;">
+                            <div class="card-header text-success">Notification</div>
+                            <div class="card-body text-success">
+                                <p class="card-text">${msg}</p>
+                            </div>
+                        </div>  
+                    </c:if>
+                    
                     <div class="text-center">
                         <input type="submit" value="Checkout" id="searchBtn">    
                     </div>
@@ -127,8 +136,10 @@
                 <div class="text-center" id="links">
                     <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
                 </div> 
+                
+                
             </div>
-        ${msg}
+        
         <script src="./js/displaySections.js"></script>
     </body>
     </c:if>
