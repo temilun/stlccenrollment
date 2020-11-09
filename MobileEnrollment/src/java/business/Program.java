@@ -29,6 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Program implements Serializable {
 
     @OneToMany(mappedBy = "progId")
+    private Collection<Students> studentsCollection;
+
+    @OneToMany(mappedBy = "progId")
     private List<Course> courseList;
     @JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
     @ManyToOne
@@ -90,5 +93,13 @@ public class Program implements Serializable {
 
     public void setDeptId(Department deptId) {
         this.deptId = deptId;
+    }
+
+    public Collection<Students> getStudentsCollection() {
+        return studentsCollection;
+    }
+
+    public void setStudentsCollection(Collection<Students> studentsCollection) {
+        this.studentsCollection = studentsCollection;
     }
 }
