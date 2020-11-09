@@ -41,9 +41,6 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
-                  </li>
-                  <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>
                   </li>
                 </ul>
@@ -62,15 +59,6 @@
                 <input type="submit" value="Class Registration" id="regBtn">
             </form>
         </div>
-            
-        <c:if test="${not empty msg}">
-            <div class="card border-success mb-3 mx-auto info">
-                <div class="card-header text-success">Notification</div>
-                <div class="card-body text-success">
-                    <p class="card-text">${msg}</p>
-                </div>
-            </div>  
-        </c:if>
             
 
         <div class="card bg-light mb-3 mx-auto info">
