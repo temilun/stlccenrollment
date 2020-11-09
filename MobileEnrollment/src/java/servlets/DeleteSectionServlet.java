@@ -1,9 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
-import business.Students;
-import business.StudentDB;
+import business.Section;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,39 +20,49 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tom
  */
-public class StudentLogonServlet extends HttpServlet {
+public class DeleteSectionServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String msg = "", userid = "";
-        String URL = "/Logon.jsp";
-        String passatt;
-        Students s;
+        
+        String URL = "/Cart.jsp", msg = "";
+        String sectionToDelete = "";
+        List<Section> cartSections = null;
+        List<Section> newSections = null;
+       
+        
         
         try {
-            userid = request.getParameter("stuId").trim();
-            s = StudentDB.getStudent(userid);
-            if (s == null){
-                msg = "No student record retrieved <br>";
-            } else {
-                //msg = "Student " + s.getStuFname() + " " + s.getStuLname() + " found.";
-                passatt = String.valueOf(request.getParameter("password").trim());
-                s.setPassAttempt(passatt);
-                if (!s.isAuthenticated()) {
-                    msg = "Unable to authenticate";
-                } else {
-                    URL = "/StudentHub.jsp";
-                    request.getSession().setAttribute("s", s);
+            sectionToDelete = request.getParameter("delete");
+            cartSections = (List<Section>) request.getSession().getAttribute("cartSections");
+            
+            for ( Section sec : cartSections ) {
+                if (sec.getCrn().equals(sectionToDelete)) {
+                    cartSections.remove(sec);
+                    newSections = cartSections;
+                    msg += sec.getCourse().getCourseName() + " CRN " + sec.getCrn() + " removed from cart. <br>";
+                    request.getSession().setAttribute("cartSections", newSections);
                 }
             }
+
         } catch (Exception e) {
-            msg = "Exception: " + e.getMessage();
+            //msg += "Error on Delete Section Servlet: " + e.getMessage();
         }
         
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
