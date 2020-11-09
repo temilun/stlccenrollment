@@ -53,6 +53,9 @@
                       <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
+                  </li>
+                  <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
                   </li>
                 </ul>
