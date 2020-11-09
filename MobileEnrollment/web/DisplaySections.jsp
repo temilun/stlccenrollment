@@ -55,9 +55,6 @@
                       <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
-                  </li>
-                  <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
                   </li>
                 </ul>
@@ -105,7 +102,7 @@
                                     
                                     <!-- This button links to the popup ( code for the popup is right below this button ) -->
                                     <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${course.courseId}">
-                                        ${course.courseName} &nbsp;&nbsp; <i class="fas fa-info-circle fa-sm"></i>
+                                        ${course.courseName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class="fas fa-info-circle fa-sm"></i>
                                     </button>
                                 </div>
                                  <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
@@ -146,7 +143,7 @@
                                     <c:forEach var="section" items="${sections}">
                                             <c:if test='${section.courseId eq course.courseId}'>
                                                 <tr onclick="selectRow(${section.crn})">
-                                                    <td><input type="radio" class="radioBtn" name="${section.courseId}" id="${section.crn}" value="${section.crn}"</td>
+                                                    <td><input type="radio" name="${section.courseId}" id="${section.crn}" value="${section.crn}"</td>
                                                     <td>${section.crn}</td>
                                                     <td>${section.days}</td>
                                                     <td class="text-center">
@@ -166,16 +163,13 @@
                             </c:if>
                         </c:forEach>
                     </c:forEach>
-                 
                             
-                    
+                            
             </div>
                         
             <div class="text-center">
                 <input type="submit" value="Add Selected Sections to Cart" id="disabledBtn">    
             </div>
-            </form>  
-           
 
             <div class="text-center" id="links">
                 <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>

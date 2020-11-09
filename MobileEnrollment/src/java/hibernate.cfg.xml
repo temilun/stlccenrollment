@@ -59,7 +59,5 @@ Contributor(s):
     <mapping class="business.Section"/>
     <mapping class="business.Semester"/>
     <mapping class="business.Transcript"/>
-    <mapping class="business.Enroll" />
-    
   </session-factory>
 </hibernate-configuration>

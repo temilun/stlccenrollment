@@ -6,7 +6,6 @@
 package business;
 
 import java.sql.Time;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -29,11 +28,6 @@ import javax.persistence.TemporalType;
 @Table(name="section")
 
 public class Section {
-
-    @Column(name = "enroll_avail")
-    private Integer enrollAvail;
-    @OneToMany(mappedBy = "crn")
-    private Collection<Enroll> enrollCollection;
 
 
     @Id
@@ -64,6 +58,8 @@ public class Section {
     @Temporal(TemporalType.TIME)
     private Date endTime;
     
+    @Column(name = "enroll_avail")
+    private String enrollAvail;
     
     @Column(name = "enroll_tot")
     private String enrollTot;
@@ -154,13 +150,13 @@ public class Section {
         this.endTime = endTime;
     }
 
-    /* public String getEnrollAvail() {
+    public String getEnrollAvail() {
         return enrollAvail;
-    } */
+    }
 
-    /* public void setEnrollAvail(String enrollAvail) {
+    public void setEnrollAvail(String enrollAvail) {
         this.enrollAvail = enrollAvail;
-    } */
+    }
 
     public String getEnrollTot() {
         return enrollTot;
@@ -200,22 +196,6 @@ public class Section {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    public Integer getEnrollAvail() {
-        return enrollAvail;
-    }
-
-    public void setEnrollAvail(Integer enrollAvail) {
-        this.enrollAvail = enrollAvail;
-    }
-
-    public Collection<Enroll> getEnrollCollection() {
-        return enrollCollection;
-    }
-
-    public void setEnrollCollection(Collection<Enroll> enrollCollection) {
-        this.enrollCollection = enrollCollection;
     }
 
     
