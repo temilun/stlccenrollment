@@ -5,10 +5,12 @@
  */
 package business;
 
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +22,11 @@ import javax.persistence.Table;
 @Table(name="advisor")
 
 public class Advisor {
+
+    @Column(name = "adv_phone")
+    private String advPhone;
+    @OneToMany(mappedBy = "advId")
+    private Collection<Students> studentsCollection;
     @Id
     @Basic(optional = false)
     @Column(name = "adv_id")
@@ -30,8 +37,6 @@ public class Advisor {
     @Basic(optional = false)
     @Column(name = "adv_lname")
     private String advLname;
-    @Column(name = "adv_phone")
-    private int advPhone;
     @Basic(optional = false)
     @Column(name = "adv_email")
     private String advEmail;
@@ -41,7 +46,7 @@ public class Advisor {
         this.advId = 0;
         this.advFname = "";
         this.advLname = "";
-        this.advPhone = 0;
+        //this.advPhone = 0;
         this.advEmail = "";
     }
 
@@ -69,7 +74,7 @@ public class Advisor {
         this.advLname = advLname;
     }
 
-    public int getAdvPhone() {
+   /* public int getAdvPhone() {
         return advPhone;
     }
 
@@ -83,6 +88,22 @@ public class Advisor {
 
     public void setAdvEmail(String advEmail) {
         this.advEmail = advEmail;
+    }
+
+    public String getAdvPhone() {
+        return advPhone;
+    } */
+
+    public void setAdvPhone(String advPhone) {
+        this.advPhone = advPhone;
+    }
+
+    public Collection<Students> getStudentsCollection() {
+        return studentsCollection;
+    }
+
+    public void setStudentsCollection(Collection<Students> studentsCollection) {
+        this.studentsCollection = studentsCollection;
     }
     
 }
