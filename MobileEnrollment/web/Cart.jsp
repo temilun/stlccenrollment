@@ -104,8 +104,10 @@
                                                 <h6>Course Code: ${section.course.subAbbrev} ${section.course.courseLevel}</h6>
                                                 <h6>CRN: ${section.crn}</h6>
                                                 <h6>Professor: ${section.professor.profFname} ${section.professor.profLname}</h6>
-                                                <h6>Days of the week: ${section.days}</h6>
-                                                <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
+                                                <c:if test="${not empty section.days}"><h6>Days of the week: ${section.days}</h6></c:if>
+                                                <c:if test="${not empty section.startTime}">
+                                                    <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
+                                                </c:if>
                                                 <h6>Credit Hours: ${section.course.courseCredit}</h6>
                                             </div>
                                             <div class="modal-footer">

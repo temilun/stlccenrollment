@@ -35,7 +35,7 @@ public class CourseDB {
             //(program id 3 is general studies)
             //(may be temporary while we figure out a solution for showing genera studies
             //along with 'Program' specific courses)
-            String qs = "FROM Course WHERE (progId = :programID OR progId = '3') ";
+            String qs = "FROM Course WHERE (progId = :programID OR progId = '3') ORDER BY course_name";
             
             //creates query from the String we made above
             Query q = session.createQuery(qs);

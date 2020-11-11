@@ -93,16 +93,16 @@
                     <!-- to run through our list course objects -->
                     <!-- info on JSTL foreach can be found here:       -->
                     <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
-                    <ul id="courseSelection" class="btn-group">
-                        <c:forEach var='course' items='${courses}'>
-                                <li>                                    
-                                    <input id="${course.courseId}" class="crsCheckbox" type="checkbox" id="${course.courseId}" name="checked" value="${course.courseId}" onclick="enableBtn();"/>
-                                    <label class="checkLabel" for='${course.courseId}'>${course.courseName}</label>                                    
-                                </li>
-                        </c:forEach>
-                    </ul>         
-                    
-                    
+                    <div style="">
+                        <ul id="courseSelection" class="btn-group">
+                            <c:forEach var='course' items='${courses}'>
+                                    <li>                                    
+                                        <input id="${course.courseId}" class="crsCheckbox" type="checkbox" id="${course.courseId}" name="checked" value="${course.courseId}" onclick="enableBtn();"/>
+                                        <label class="checkLabel" for='${course.courseId}'>${course.courseName}</label>                                    
+                                    </li>
+                            </c:forEach>
+                        </ul> 
+                    </div>                    
                     <div class="text-center">
                         <input type="submit" value="Display Classes" id="disabledBtn">    
                     </div>
