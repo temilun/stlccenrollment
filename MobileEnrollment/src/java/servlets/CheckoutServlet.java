@@ -49,12 +49,25 @@ public class CheckoutServlet extends HttpServlet {
             s = (Students)request.getSession().getAttribute("s");
             String stu_id = s.getStuId();
             
-            for (Section i : secs) {
-                enr = new Enroll();
-                enr.setCrn(i.getCrn());
-                enr.setStuId(s.getStuId());
-                enr.setEnrollDate(new Date());
-                enrollList.add(enr);
+            //this should check if any classes in cart happen at the same time (seems not to be running right now?)
+            for (int j = 0; j < secs.size() - 1; j++) {
+                for (int k = j + 1; k < secs.size(); k++) {
+                    if (secs.get(j).getDays() == secs.get(k).getDays()) {
+                        if (secs.get(j).getStartTime() == secs.get(k).getStartTime()) {
+                            msg += secs.get(j).getCrn() + " occurs at the same time as " + secs.get(k).getCrn() + "<br>";
+                        }
+                    }
+                }
+            }
+            
+            if (msg.isEmpty()) {
+                for (Section i : secs) {
+                    enr = new Enroll();
+                    enr.setCrn(i.getCrn());
+                    enr.setStuId(s.getStuId());
+                    enr.setEnrollDate(new Date());
+                    enrollList.add(enr);
+                }
             }
         } catch (Exception e) {
             msg += "Error on Checkout Servlet: " + e.getMessage();
