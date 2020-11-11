@@ -119,7 +119,6 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h3>${course.courseName}</h3>
                                                 <p>${course.courseDesc}</p>
                                                 <h5>Credit Hours: ${course.courseCredit}</h5>
                                             </div>
