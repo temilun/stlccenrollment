@@ -119,7 +119,6 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h3>${course.courseName}</h3>
                                                 <p>${course.courseDesc}</p>
                                                 <h5>Credit Hours: ${course.courseCredit}</h5>
                                             </div>
@@ -137,9 +136,9 @@
                                                 <th scope="col">CRN</th>
                                                 <th scope="col">Day(s)</th>
                                                 <th scope="col">Time</th>
-                                                <th scope="col">Status</th>
+                                                <th scope="col">Section Type</th>
                                                 <th scope="col">Avail.</th>
-                                                <th scope="col">Prof.</th>
+                                                <th scope="col">Term Type</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -150,13 +149,36 @@
                                                     <td>${section.crn}</td>
                                                     <td>${section.days}</td>
                                                     <td class="text-center">
-                                                        <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" />
-                                                        <br>-<br>
-                                                        <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" />
+                                                        <c:choose>
+                                                            <c:when test="${not empty section.startTime}">
+                                                                <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" />
+                                                                <br>-<br>
+                                                                <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" />
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <br><br><br>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
-                                                    <td>${section.status}</td>
+                                                    <td>${section.secType}</td>
                                                     <td>${section.enrollAvail}</td>
-                                                    <td>${section.professor.profFname} ${section.professor.profLname}</td>
+                                                    <td>
+                                                        <c:if test="${section.termType == 'FT'}">
+                                                            Full Term
+                                                        </c:if>
+                                                        <c:if test="${section.termType == '1H'}">
+                                                            First Half
+                                                        </c:if>
+                                                        <c:if test="${section.termType == '2H'}">
+                                                            Second Half
+                                                        </c:if>
+                                                        <c:if test="${section.termType == '12W'}">
+                                                            12 Week
+                                                        </c:if>
+                                                        <c:if test="${section.termType == 'SOS'}">
+                                                            Spring Off Schedule
+                                                        </c:if>
+                                                    </td>
                                                 </tr>
                                         </c:if>
                                     </c:forEach>
