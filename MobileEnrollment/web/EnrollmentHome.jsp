@@ -119,6 +119,18 @@
                     <div id="advDiv" style="display: none;" class="pb-4">
                         <div id="sectionHead">
                             <h3>Advanced Search</h3>
+                            <small class="form-text text-muted pb-1">Use the search options to find classes.</small>
+                        </div>
+                        <div class="deptSelect" style="width:80%;">
+                            <select id="course_sub" name="progID">
+                                <option value="0">Subjects</option>
+                                <c:forEach var='subject' items='${subjects}'>
+                                    <option value="${subject}">${subject}</option>
+                                </c:forEach>    
+                            </select>
+                        </div>
+                        <div>
+                            
                         </div>
                     </div>
                     

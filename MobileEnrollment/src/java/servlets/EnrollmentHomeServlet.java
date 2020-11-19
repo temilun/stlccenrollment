@@ -9,6 +9,7 @@ import business.Department;
 import business.DepartmentDB;
 import business.Program;
 import business.ProgramDB;
+import business.SubjectDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -31,20 +32,23 @@ public class EnrollmentHomeServlet extends HttpServlet {
         
         //This is where the list of programs is stored
         List<Program> progs;
+        List<String> subjects;
         
         try {
             //progs = list of all programs from the database
             progs = ProgramDB.getPrograms();
-            if (progs == null ) {
-                msg = "Programs returned null. <br>";
+            subjects = SubjectDB.getSubjects();
+            if (progs == null) {
+                msg = "Programs or subjects returned null. <br>";
                 URL = "/StudentHub.jsp";
             } else {
                 //if progs is not null, set the session attribute of "progs"
                 //  to our list of programs
                 request.getSession().setAttribute("progs", progs);
+                request.getSession().setAttribute("subjects", subjects);
             }
         } catch(Exception e) {
-            msg = "Program Select Servlet Error: " + e.getMessage();
+            msg = "Enrollment Home Servlet Error: " + e.getMessage();
             URL = "/StudentHub.jsp";
         }
         request.setAttribute("msg", msg);
