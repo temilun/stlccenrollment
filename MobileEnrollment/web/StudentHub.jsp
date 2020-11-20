@@ -41,7 +41,7 @@
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>

@@ -63,84 +63,94 @@
                 <h1 id="registrationHeader">Shopping Cart - Checkout</h1>
                 <small class="pl-3">Review your courses and checkout</small>
             </div>
-            <div id="mainForm" class="pt-3">
-                
-                
-                <form action="CheckoutServlet">
-                    <table class="table table-hover">
-                        <tr>
-                            <th scope="col">CRN</th>
-                            <th scope="col">Title</th>
-                            <th scope="col" class="text-center">Course Info</th>
-                            <th scope="col">Delete</th>
-                        </tr>
-                        <c:forEach var="section" items="${cartSections}">
-                            <tr>
-                                <td>${section.crn}</td>
-                                <td>${section.course.courseName}</td>
-                                <td style="text-align: center">
-                                    <!-- Jon did this part -->
-                                    <!-- This button links to the popup ( code for the popup is right below this button ) -->
-                                    <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${section.course.courseId}">
-                                       <i class="fas fa-info-circle fa-sm" style="padding-top:-20px;"></i>
-                                    </button>
-                                </td>
-                                <td style="text-align:right"><a href="<%=request.getContextPath()%>/DeleteSection?delete=${section.crn}"><i class="fas fa-trash-alt"></i></a></td>
-                            </tr>
-                            <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
-
-                                <div class="modal fade" id="Modal${section.course.courseId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title" id="exampleModalLongTitle">${section.course.courseName}</h3>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>${section.course.courseDesc}</p>
-                                                <h4><strong>Section Information:</strong></h4>
-                                                <h6>Course Code: ${section.course.subAbbrev} ${section.course.courseLevel}</h6>
-                                                <h6>CRN: ${section.crn}</h6>
-                                                <h6>Professor: ${section.professor.profFname} ${section.professor.profLname}</h6>
-                                                <c:if test="${not empty section.days}"><h6>Days of the week: ${section.days}</h6></c:if>
-                                                <c:if test="${not empty section.startTime}">
-                                                    <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
-                                                </c:if>
-                                                <h6>Credit Hours: ${section.course.courseCredit}</h6>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                        </c:forEach>
-                    </table>
-                    
-                    
-                    <c:if test="${not empty msg}">
-                        <div class="card border-success mb-3 mx-auto info" style="width: 80%;">
+            <div id="mainForm" class="">
+                <c:if test="${not empty msg}">
+                        <div class="card border-success mb-3 mx-auto info mt-3" style="width: 95%;">
                             <div class="card-header text-success">Notification</div>
                             <div class="card-body text-success">
                                 <p class="card-text">${msg}</p>
                             </div>
                         </div>  
-                    </c:if>
-                    
-                    <div class="text-center">
-                        <input type="submit" value="Checkout" id="searchBtn">    
-                    </div>
-                </form>  
+                </c:if>
+                <c:choose>
+                    <c:when test="${not empty cartSections}">
+                        <form action="CheckoutServlet">
+                            <table class="table">
+                                <tr>
+                                    <th scope="col">CRN</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col" class="text-center">Section Info</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                                <c:forEach var="section" items="${cartSections}">
+                                    <tr>
+                                        <td style="text-align: center; vertical-align: middle;">${section.crn}</td>
+                                        <td style="white-space: normal !important; vertical-align: middle;">${section.course.courseName}</td>
+                                        <td style="text-align: center; vertical-align: middle;">
+                                            <!-- Jon did this part -->
+                                            <!-- This button links to the popup ( code for the popup is right below this button ) -->
+                                            <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${section.course.courseId}">
+                                               <i class="fas fa-info-circle fa-sm" style="padding-top:-20px;"></i>
+                                            </button>
+                                        </td>
+                                        <td style="text-align:center; vertical-align: middle;"><a href="<%=request.getContextPath()%>/DeleteSection?delete=${section.crn}"><i class="fas fa-trash-alt"></i></a></td>
+                                    </tr>
+                                    <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
+
+                                        <div class="modal fade" id="Modal${section.course.courseId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="exampleModalLongTitle">${section.course.courseName}</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>${section.course.courseDesc}</p>
+                                                        <h4><strong>Section Information:</strong></h4>
+                                                        <h6>Course Code: ${section.course.subAbbrev} ${section.course.courseLevel}</h6>
+                                                        <h6>CRN: ${section.crn}</h6>
+                                                        <h6>Professor: ${section.professor.profFname} ${section.professor.profLname}</h6>
+                                                        <c:if test="${not empty section.days}"><h6>Days of the week: ${section.days}</h6></c:if>
+                                                        <c:if test="${not empty section.startTime}">
+                                                            <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
+                                                        </c:if>
+                                                        <h6>Credit Hours: ${section.course.courseCredit}</h6>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                </c:forEach>
+                            </table>
 
 
+
+
+                            <div class="text-center">
+                                <input type="submit" value="Checkout" id="searchBtn">    
+                            </div>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <hr>
+                        <div class="text-center">
+                            <h5 class="my-5">Your cart is empty!</h5>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
+                
                 <div class="text-center" id="links">
                     <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
                 </div> 
                 
                 
             </div>
+        </div>
         
         <script src="./js/displaySections.js"></script>
     </body>

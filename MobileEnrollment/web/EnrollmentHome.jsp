@@ -19,6 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
        
         <title>Enrollment Home - Search for classes</title>
    
@@ -51,7 +52,7 @@
                       <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
@@ -69,6 +70,7 @@
                 <form action="SelectClasses">
                     <div  id="sectionHead">
                         <h3>Select a Term</h3>
+                        <small class="form-text text-muted pb-1">Choose the term you want to register for.</small>
                     </div>
                     <ul id="termSelection" class="btn-group pb-4">
                         <li>
@@ -104,11 +106,11 @@
                     <div id="deptDiv" style="display: none;" class="pb-4">
                         <div id="sectionHead">
                             <h3>Search by Degree/Certificate</h3>
-                            <small class="form-text text-muted pb-1">Please select your Degree/Certificate program from the dropdown.</small>
+                            <small class="form-text text-muted pb-1">Please select your Degree/Certificate program from the dropdown. Alternatively, select "Search by my program" to view all classes required to complete your degree.</small>
                         </div>
-                        <div class="deptSelect" style="width:80%;">
+                        <div class="deptSelect px-3" style="width:80%;">
                             <select id="progID" name="progID">
-                                <option value="0">Select your degree or program</option>
+                                <option disabled selected value>Select a program</option>
                                 <c:forEach var='prog' items='${progs}'>
                                     <option value="${prog.progId}">${prog.progName}</option>
                                 </c:forEach>    
@@ -119,11 +121,11 @@
                     <div id="advDiv" style="display: none;" class="pb-4">
                         <div id="sectionHead">
                             <h3>Advanced Search</h3>
-                            <small class="form-text text-muted pb-1">Use the search options to find classes.</small>
+                            <small class="form-text text-muted pb-1">Search by:</small>
                         </div>
-                        <div class="deptSelect" style="width:80%;">
-                            <select id="course_sub" name="progID">
-                                <option value="0">Subjects</option>
+                        <div class="SubjectSearch px-3" style="width:80%;">
+                            <select id="course_sub" id="course_subject" name="course_subject">
+                                <option disabled selected value>Select a Subject</option>
                                 <c:forEach var='subject' items='${subjects}'>
                                     <option value="${subject}">${subject}</option>
                                 </c:forEach>    

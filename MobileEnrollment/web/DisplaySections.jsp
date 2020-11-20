@@ -55,7 +55,7 @@
                       <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
@@ -101,12 +101,19 @@
                     <c:forEach var="course" items="${courses}">
                         <c:forEach var="id" items="${courseIDs}">
                             <c:if test='${course.courseId eq id}'>
-                                <div class="sectionHead pt-3">
+                                <div class="sectionHead pt-4">
+                                    <table style="width: 100%; padding-bottom: 20px">
+                                        <tr>
+                                            <td style="font-size: 1.5em;" colspan="3">${course.courseName}</td>
+                                            <td colspan="1" class="mx-auto">
+                                                <!-- This button links to the popup ( code for the popup is right below this button ) -->
+                                                <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${course.courseId}">
+                                                    <i class="fas fa-info-circle fa-sm"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
                                     
-                                    <!-- This button links to the popup ( code for the popup is right below this button ) -->
-                                    <button type="button" class="sectionHeadBtn" data-toggle="modal" data-target="#Modal${course.courseId}">
-                                        ${course.courseName} &nbsp;&nbsp; <i class="fas fa-info-circle fa-sm"></i>
-                                    </button>
                                 </div>
                                  <!-- Modal (Popup) | for more info on Bootstrap modals go here: https://getbootstrap.com/docs/4.0/components/modal/ -->
                                 <div class="modal fade" id="Modal${course.courseId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -132,23 +139,23 @@
                                     <table class="table table-hover table-sm">
                                         <thead>    
                                             <tr>
-                                                <th scope="col"><i class="fas fa-check"></i></th>
-                                                <th scope="col">CRN</th>
-                                                <th scope="col">Day(s)</th>
-                                                <th scope="col">Time</th>
-                                                <th scope="col">Section Type</th>
-                                                <th scope="col">Avail.</th>
-                                                <th scope="col">Term Type</th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col"><i class="fas fa-check"></i></th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col">CRN</th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col">Day(s)</th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col">Time</th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col">Section Type</th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col">Avail.</th>
+                                                <th style="text-align: center; vertical-align: middle;" scope="col">Term Type</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                     <c:forEach var="section" items="${sections}">
                                             <c:if test='${section.courseId eq course.courseId}'>
                                                 <tr onclick="selectRow(${section.crn})">
-                                                    <td><input type="radio" class="radioBtn" name="${section.courseId}" id="${section.crn}" value="${section.crn}"</td>
-                                                    <td>${section.crn}</td>
-                                                    <td>${section.days}</td>
-                                                    <td class="text-center">
+                                                    <td style="text-align: center; vertical-align: middle;"><input type="radio" class="radioBtn" name="${section.courseId}" id="${section.crn}" value="${section.crn}"</td>
+                                                    <td style="text-align: center; vertical-align: middle;">${section.crn}</td>
+                                                    <td style="text-align: center; vertical-align: middle;">${section.days}</td>
+                                                    <td style="text-align: center; vertical-align: middle;" class="text-center">
                                                         <c:choose>
                                                             <c:when test="${not empty section.startTime}">
                                                                 <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" />
@@ -160,9 +167,9 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
-                                                    <td>${section.secType}</td>
-                                                    <td>${section.enrollAvail}</td>
-                                                    <td>
+                                                    <td style="text-align: center; vertical-align: middle;">${section.secType}</td>
+                                                    <td style="text-align: center; vertical-align: middle;">${section.enrollAvail}</td>
+                                                    <td style="text-align: center; vertical-align: middle;">
                                                         <c:if test="${section.termType == 'FT'}">
                                                             Full Term
                                                         </c:if>
