@@ -34,7 +34,7 @@
     <c:if test="${s.authenticated}">
     <body>
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="/StudentHub.jsp">
+            <a class="navbar-brand" href="./StudentHub.jsp">
               <img src="./img/stlcc-logo.jpg" width="30" height="30" alt="" loading="lazy">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

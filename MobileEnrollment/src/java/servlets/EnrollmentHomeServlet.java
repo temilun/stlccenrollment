@@ -34,6 +34,8 @@ public class EnrollmentHomeServlet extends HttpServlet {
         List<Program> progs;
         List<String> subjects;
         
+        request.getSession().setAttribute("sectionsInSearch", null);
+        
         try {
             //progs = list of all programs from the database
             progs = ProgramDB.getPrograms();

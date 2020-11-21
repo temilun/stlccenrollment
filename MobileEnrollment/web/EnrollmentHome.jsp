@@ -93,11 +93,11 @@
                         </div>
                         <ul>
                             <li>
-                                <input id="progSearch" class="termbtn" type="radio" name="search" value="progSearch" onclick="showProgs(); enableBtn();" required/>
+                                <input id="progSearch" class="termbtn" type="radio" name="searchType" value="progSearch" onclick="showProgs(); enableBtn();" required/>
                                 <label id="termLabel" for="progSearch">Search by Degree/Program</label>
                             </li>
                             <li>
-                                <input id="advSearch" class="termbtn" type="radio" name="search" value="advSearch" onclick="showAdvSearch(); enableBtn();" required/>
+                                <input id="advSearch" class="termbtn" type="radio" name="searchType" value="advSearch" onclick="showAdvSearch();" required/>
                                 <label id="termLabel" for="advSearch">Advanced Search</label>
                             </li>
                         </ul>
@@ -124,15 +124,21 @@
                             <small class="form-text text-muted pb-1">Search by:</small>
                         </div>
                         <div class="SubjectSearch px-3" style="width:80%;">
-                            <select id="course_sub" id="course_subject" name="course_subject">
+                            <label for="course_sub" id="termLabel">Subject</label>
+                            <select id="course_sub" name="course_subject" onchange="enableBtn();">
                                 <option disabled selected value>Select a Subject</option>
                                 <c:forEach var='subject' items='${subjects}'>
                                     <option value="${subject}">${subject}</option>
                                 </c:forEach>    
                             </select>
                         </div>
-                        <div>
-                            
+                        <div class="startTimeSearch px-3" style="width:80%;">
+                            <label for="startTime" id="termLabel">Start Time</label>
+                            <input type="time" id="startTime" name="startTime" min="08:00" max="21:00">
+                        </div>
+                        <div class="startTimeSearch px-3" style="width:80%;">
+                            <label for="endTime" id="termLabel">End Time</label>
+                            <input type="time" id="endTime" name="endTime" min="08:00" max="22:00">
                         </div>
                     </div>
                     
