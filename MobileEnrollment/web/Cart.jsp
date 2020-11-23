@@ -117,7 +117,6 @@
                         </c:forEach>
                     </table>
                     
-                    
                     <c:if test="${not empty msg}">
                         <div class="card border-success mb-3 mx-auto info" style="width: 80%;">
                             <div class="card-header text-success">Notification</div>

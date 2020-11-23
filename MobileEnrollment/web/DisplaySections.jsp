@@ -11,6 +11,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+
+
  <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,6 +26,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <title>Enrollment Home - Search for classes</title>
         </style>
@@ -156,7 +159,53 @@
                                                     </td>
                                                     <td>${section.status}</td>
                                                     <td>${section.enrollAvail}</td>
-                                                    <td>${section.professor.profFname} ${section.professor.profLname}</td>
+                                                    <!-- Jon did the contact form here -->
+                                                    <td>
+                                                        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header text-center">
+                                                                        <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body mx-3">
+                                                                        <div class="md-form mb-5">
+                                                                            <i class="fas fa-user prefix grey-text"></i>
+                                                                            <input type="text" id="form34" class="form-control validate">
+                                                                            <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                                                                        </div>
+                                                                        
+                                                                        <div class="md-form mb-5">
+                                                                            <i class="fas fa-envelope prefix grey-text"></i>
+                                                                            <input type="email" id="form29" class="form-control validate">
+                                                                            <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                                                                        </div>
+
+                                                                        <div class="md-form mb-5">
+                                                                            <i class="fas fa-tag prefix grey-text"></i>
+                                                                            <input type="text" id="form32" class="form-control validate">
+                                                                            <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                                                                        </div>
+
+                                                                        <div class="md-form">
+                                                                            <i class="fas fa-pencil-alt"></i>
+                                                                            <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                                                            <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="modal-footer d-flex justify-content-center">
+                                                                        <button class="btn btn-unique">Send <i class="far fa-paper-plane"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="text-center">
+                                                        <a href="" style="color:blue" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">${section.professor.profFname} ${section.professor.profLname}</a>
+                                                        </div>
                                                 </tr>
                                         </c:if>
                                     </c:forEach>
