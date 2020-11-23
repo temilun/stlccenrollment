@@ -11,6 +11,7 @@ import business.Section;
 import business.SectionDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -28,7 +29,8 @@ public class DisplaySectionsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "/DisplaySections.jsp", msg ="";
-        List<Section> sections = null;
+        List<Section> sections = new ArrayList();
+        List<Section> sectionsInSearch = null;
 
         String[] courseIDs;
         List<Course> courses;
@@ -44,15 +46,31 @@ public class DisplaySectionsServlet extends HttpServlet {
         try {
             courseIDs = request.getParameterValues("checked");
             
+            //if there are sections on session from advanced search, get them
+            if (request.getSession().getAttribute("sectionsInSearch") != null) {
+                sectionsInSearch = (List<Section>) request.getSession().getAttribute("sectionsInSearch");
+                request.getSession().setAttribute("courseIDs", courseIDs);
+                
+                //for each section in sectionsInSearch,
+                //  run through selected courseIDs and see if 
+                //  they match. if the courseID matches, add
+                //  section to sections to be displayed
+                for (Section sec : sectionsInSearch) {
+                    for (String id : courseIDs) {
+                        if (sec.getCourseId().equals(id)) {
+                            sections.add(sec);
+                        }
+                    }
+                }
+            } else {
+                request.getSession().setAttribute("courseIDs", courseIDs);
+                sections = SectionDB.getSections(courseIDs);
+            }
             
            
-            request.getSession().setAttribute("courseIDs", courseIDs);
             
             
-            
-            sections = SectionDB.getSections(courseIDs);
-            
-            if (sections != null) {
+            if (!sections.isEmpty()) {
                 request.getSession().setAttribute("sections", sections);
             } else {
                 msg = "Sections returned null";

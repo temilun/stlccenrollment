@@ -35,7 +35,10 @@ public class SelectClassesServlet extends HttpServlet {
         List<Course> courses = new ArrayList();
         List<Section> sectionsInSearch;
         
-       
+        
+        if (request.getSession().getAttribute("sectionsInSearch") != null) {
+            request.getSession().removeAttribute("sectionsInSearch");
+        }
         //grabbing search type (search by program or advanced search)
         try {
             searchType = request.getParameter("searchType");
@@ -45,6 +48,8 @@ public class SelectClassesServlet extends HttpServlet {
         
         if (searchType != null && searchType.equals("progSearch")) {
             try {
+                
+                
                 //progID is grabbing the program that the student selected on the
                 //EnrollmentHome.jsp webpage
                 progID = request.getParameter("progID");
