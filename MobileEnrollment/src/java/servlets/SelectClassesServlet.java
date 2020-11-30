@@ -35,10 +35,11 @@ public class SelectClassesServlet extends HttpServlet {
         List<Course> courses = new ArrayList();
         List<Section> sectionsInSearch;
         
-        
+        //removing sections from previous searh if advanced search was used
         if (request.getSession().getAttribute("sectionsInSearch") != null) {
             request.getSession().removeAttribute("sectionsInSearch");
         }
+        
         //grabbing search type (search by program or advanced search)
         try {
             searchType = request.getParameter("searchType");
@@ -46,10 +47,9 @@ public class SelectClassesServlet extends HttpServlet {
             msg = "Error on getting search type.";
         }
         
+        //Search by Program
         if (searchType != null && searchType.equals("progSearch")) {
             try {
-                
-                
                 //progID is grabbing the program that the student selected on the
                 //EnrollmentHome.jsp webpage
                 progID = request.getParameter("progID");
@@ -70,16 +70,17 @@ public class SelectClassesServlet extends HttpServlet {
                 msg = "Program search error: "+ e.getMessage();
                 URL = "./EnrollmentHome.jsp";
             }
+        //Advanced Search
         } else if (searchType != null && searchType.equals("advSearch")) {
             try {
-                String subject;
+                String[] subjects;
                 String startTime = "", endTime = "";
                 Date start = null, end = null;
                 String campusId;
                 String termType, classType;
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 
-                subject = request.getParameter("course_subject");
+                subjects = request.getParameterValues("course_subject");
                 startTime = request.getParameter("startTime");
                 if (!startTime.isEmpty()) {
                     start = sdf.parse(startTime);
@@ -95,7 +96,7 @@ public class SelectClassesServlet extends HttpServlet {
                 classType = request.getParameter("classType");
                 
                 
-                sectionsInSearch = AdvSearchDB.getSectionsAdv(subject, start, end, campusId, termType, classType);
+                sectionsInSearch = AdvSearchDB.getSectionsAdv(subjects, start, end, campusId, termType, classType);
                 //putting search results on session to access after class selection
                 request.getSession().setAttribute("sectionsInSearch", sectionsInSearch);
                 

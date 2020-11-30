@@ -23,7 +23,6 @@
        
         <title>Enrollment Home - Search for classes</title>
    
-        </style>
 
     </head>
     <c:if test="${!s.authenticated} ">
@@ -125,7 +124,7 @@
                         </div>
                         <div class="SubjectSearch px-3" style="width:80%;">
                             <label for="course_sub" id="termLabel">Subject</label>
-                            <select id="course_sub" name="course_subject" onchange="enableBtn();">
+                            <select id="course_sub" name="course_subject" onchange="enableBtn();" multiple>
                                 <option disabled selected value>Select a Subject</option>
                                 <c:forEach var='subject' items='${subjects}'>
                                     <option value="${subject}">${subject}</option>
