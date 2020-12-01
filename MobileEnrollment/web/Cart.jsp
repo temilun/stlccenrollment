@@ -116,6 +116,9 @@
                                                         <c:if test="${not empty section.startTime}">
                                                             <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
                                                         </c:if>
+                                                        <c:if test="${not empty section.campus.campId}">
+                                                            <h6>Campus: ${section.campus.campName}</h6>
+                                                        </c:if>
                                                         <h6>Credit Hours: ${section.course.courseCredit}</h6>
                                                     </div>
                                                     <div class="modal-footer">

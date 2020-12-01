@@ -26,20 +26,13 @@ public class AdvSearchDB {
         List<Section> sections;
         List<Course> courses = new ArrayList();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-        
-        
-        
         try {
             session = sessionFactory.openSession();
-            
-            
-            
             //creating query with the Criteria API
             Criteria criteria = session.createCriteria(Section.class);
-            
             //creating a criteria alias to access nested Course object
             criteria.createAlias("course", "course");
-            
+            criteria.createAlias("campus", "campus");
             //if subject is not null, find sections with the course subject of <subject>
             if (subjects != null) {
                 criteria.add(Restrictions.in("course.courseSub", subjects));
@@ -51,12 +44,17 @@ public class AdvSearchDB {
             if (end != null) {
                 criteria.add(Restrictions.like("endTime", end));
             }
+            if (campusId != null) {
+                criteria.add(Restrictions.like("campus.campId", campusId));
+            }
+            if (termType != null) {
+                criteria.add(Restrictions.like("termType", termType));
+            }
+            if (classType != null) {
+                criteria.add(Restrictions.like("secType", classType));
+            }
             
-            
-
             sections = criteria.list();
-            
-
         } catch (Exception e) {
             sections = null;
         } finally {

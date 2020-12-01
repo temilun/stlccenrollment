@@ -5,10 +5,13 @@
  */
 package servlets;
 
+import business.Campus;
+import business.CampusDB;
 import business.Department;
 import business.DepartmentDB;
 import business.Program;
 import business.ProgramDB;
+import business.SectionDB;
 import business.SubjectDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +36,7 @@ public class EnrollmentHomeServlet extends HttpServlet {
         //This is where the list of programs is stored
         List<Program> progs;
         List<String> subjects;
+        List<Campus> campuses;
         
         request.getSession().setAttribute("sectionsInSearch", null);
         
@@ -40,6 +44,8 @@ public class EnrollmentHomeServlet extends HttpServlet {
             //progs = list of all programs from the database
             progs = ProgramDB.getPrograms();
             subjects = SubjectDB.getSubjects();
+            campuses = CampusDB.getCampuses();
+            
             if (progs == null) {
                 msg = "Programs or subjects returned null. <br>";
                 URL = "/StudentHub.jsp";
@@ -48,6 +54,7 @@ public class EnrollmentHomeServlet extends HttpServlet {
                 //  to our list of programs
                 request.getSession().setAttribute("progs", progs);
                 request.getSession().setAttribute("subjects", subjects);
+                request.getSession().setAttribute("campuses", campuses);
             }
         } catch(Exception e) {
             msg = "Enrollment Home Servlet Error: " + e.getMessage();

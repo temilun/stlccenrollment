@@ -51,7 +51,7 @@
         </nav>
         
        
-        <div>
+        <div class="pt-3">
             <h1 class="text-center" id="profileImage"></h1>
         </div>
         

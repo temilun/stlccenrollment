@@ -66,6 +66,5 @@ public class SectionDB {
             session.close();
         }
         return sections;
-    }
-    
+    }    
 }

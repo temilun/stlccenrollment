@@ -5,10 +5,7 @@ import business.Course;
 import business.CourseDB;
 import business.Section;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -91,10 +88,9 @@ public class SelectClassesServlet extends HttpServlet {
                 } else {
                     
                 }
-                campusId = request.getParameter("campus");
+                campusId = request.getParameter("campusId");
                 termType = request.getParameter("termType");
                 classType = request.getParameter("classType");
-                
                 
                 sectionsInSearch = AdvSearchDB.getSectionsAdv(subjects, start, end, campusId, termType, classType);
                 //putting search results on session to access after class selection
