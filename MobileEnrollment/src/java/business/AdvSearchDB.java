@@ -42,9 +42,7 @@ public class AdvSearchDB {
             
             //if subject is not null, find sections with the course subject of <subject>
             if (subjects != null) {
-                for (String subject : subjects) {
-                    criteria.add(Restrictions.like("course.courseSub", subject));
-                }
+                criteria.add(Restrictions.in("course.courseSub", subjects));
             }
             if (start != null) {
                 //Date start = sdf.parse(startTime);

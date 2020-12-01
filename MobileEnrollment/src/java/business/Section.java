@@ -64,6 +64,13 @@ public class Section {
     @Temporal(TemporalType.TIME)
     private Date endTime;
     
+//    @JoinColumn(name = "camp_id", referencedColumnName = "camp_id")
+//    @ManyToOne( targetEntity = Campus.class)
+//    private String campusId;
+//    
+//    @JoinColumn(name = "camp_id", insertable=false, updatable=false)
+//    @ManyToOne(targetEntity = Campus.class)
+//    private Campus campus;
     
     @Column(name = "enroll_tot")
     private String enrollTot;
