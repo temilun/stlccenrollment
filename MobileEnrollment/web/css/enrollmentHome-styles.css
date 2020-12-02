@@ -46,77 +46,6 @@ input:checked + label {
     transition: .1s;
 }
 
-
-/*Dropdown styling was taken from:
-https://www.w3schools.com/howto/howto_custom_select.asp
-*/
-.deptSelect {
-    position: relative;
-    padding-left: 15px;
-    color: #1d3d70;
-}
-
-.deptSelect select {
-    display: none; /*hides original select element*/
-    /*padding-left: 15px; */
-}
-
-.select-selected {
-    background-color: white;
-    color: #1d3d70;
-    border: 1px solid #1d3d70;
-}
-
-/*style the arrow inside the select element*/
-.select-selected:after {
-    position: absolute;
-    content: "";
-    top: 14px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid #1d3d70;
-    border-color: #1d3d70 transparent transparent transparent;
-  
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,.select-selected {
-  color: #1d3d70;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-  position: absolute;
-  color: #1d3d70;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  margin-left: 15px;
-  background-color: white;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
-  color: #1d3d70;
-}
-
 .form-group {
     padding-top: 30px;
 }
@@ -163,3 +92,4 @@ a {
 li {
     padding-top: 10px; 
 }
+

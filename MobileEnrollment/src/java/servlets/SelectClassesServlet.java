@@ -1,9 +1,13 @@
 package servlets;
 
+import business.AdvSearchDB;
 import business.Course;
 import business.CourseDB;
+import business.Section;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,30 +26,97 @@ public class SelectClassesServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         //setting default values
-        String URL = "/SelectClasses.jsp", msg = "", progID = "";
-        List<Course> courses = null;
-
-        try {
-            //progID is grabbing the program that the student selected on the
-            //EnrollmentHome.jsp webpage
-            progID = request.getParameter("progID");
-            
-            //the "courses" variable calls the getCourses() method in the CourseDB class
-            //running the program id we pulled from the webpage in as the parameter
-            courses = CourseDB.getCourses(progID);
-
-            if (courses != null) {
-                //if courses is not null, push the courses to the session (webpage)                
-                request.getSession().setAttribute("courses", courses);
-            } else {
-                //if null update message to "courses returned null"
-                msg = "Courses returned null.";
-                URL = "/SelectClasses.jsp";
-            }
-        } catch(Exception e) {
-            msg = "Select Classes servlet error: "+ e.getMessage();
-            URL = "/SelectClasses.jsp";
+        String URL = "/SelectClasses.jsp", msg = "";
+        String searchType = "";
+        String progID = "";
+        List<Course> courses = new ArrayList();
+        List<Section> sectionsInSearch;
+        
+        //removing sections from previous searh if advanced search was used
+        if (request.getSession().getAttribute("sectionsInSearch") != null) {
+            request.getSession().removeAttribute("sectionsInSearch");
         }
+        
+        //grabbing search type (search by program or advanced search)
+        try {
+            searchType = request.getParameter("searchType");
+        } catch (Exception e) {
+            msg = "Error on getting search type.";
+        }
+        
+        //Search by Program
+        if (searchType != null && searchType.equals("progSearch")) {
+            try {
+                //progID is grabbing the program that the student selected on the
+                //EnrollmentHome.jsp webpage
+                progID = request.getParameter("progID");
+
+                //the "courses" variable calls the getCourses() method in the CourseDB class
+                //running the program id we pulled from the webpage in as the parameter
+                courses = CourseDB.getCourses(progID);
+
+                if (courses != null) {
+                    //if courses is not null, push the courses to the session (webpage)                
+                    request.getSession().setAttribute("courses", courses);
+                } else {
+                    //if null update message to "courses returned null"
+                    msg = "Courses returned null.";
+                    URL = "/SelectClasses.jsp";
+                }
+            } catch(Exception e) {
+                msg = "Program search error: "+ e.getMessage();
+                URL = "./EnrollmentHome.jsp";
+            }
+        //Advanced Search
+        } else if (searchType != null && searchType.equals("advSearch")) {
+            try {
+                String[] subjects;
+                String startTime = "", endTime = "";
+                Date start = null, end = null;
+                String campusId;
+                String termType, classType;
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                
+                subjects = request.getParameterValues("course_subject");
+                startTime = request.getParameter("startTime");
+                if (!startTime.isEmpty()) {
+                    start = sdf.parse(startTime);
+                }
+                endTime = request.getParameter("endTime");  
+                if (!endTime.isEmpty()) {
+                    end = sdf.parse(endTime);
+                } else {
+                    
+                }
+                campusId = request.getParameter("campusId");
+                termType = request.getParameter("termType");
+                classType = request.getParameter("classType");
+                
+                sectionsInSearch = AdvSearchDB.getSectionsAdv(subjects, start, end, campusId, termType, classType);
+                //putting search results on session to access after class selection
+                request.getSession().setAttribute("sectionsInSearch", sectionsInSearch);
+                
+                
+                for (Section sec : sectionsInSearch ) {
+                    if (!courses.contains(sec.getCourse())) {
+                        courses.add(sec.getCourse());
+                    }
+                }
+                
+                if (!courses.isEmpty()) {
+                    request.getSession().setAttribute("courses", courses);
+                } else {
+                    msg = "No courses found for your search! Try again with different search parameters";
+                    URL = "/EnrollmentHome.jsp";
+                }
+            } catch (Exception e) {
+                msg = "Adv Search error: " + e.getMessage();
+                URL = "/EnrollmentHome.jsp";
+            }
+        }
+        
+            
+        
 
         //set message attribute as the message in case any errors happen
         request.setAttribute("msg", msg);

@@ -21,6 +21,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
         
         
         <title>Enrollment Home - Search for classes</title>
@@ -52,7 +53,7 @@
                       <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
@@ -64,7 +65,6 @@
         <div class="registrationContainer">
             <div>
                 <h1 id="registrationHeader">Select Classes</h1>
-                <hr>
             </div>
             <div id="mainForm">
                 
@@ -80,8 +80,7 @@
                      are going to be searched -->
                 
                 <form action="DisplaySections">
-                    <div class="sectionHead">
-                        <h3>Courses</h3>
+                    <div class="sectionHead pb-3">
                         <small id="crsTip" class="form-text text-muted">
                             Select all classes that you have interest in registering for,
                             then hit "Display Classes"
@@ -93,16 +92,28 @@
                     <!-- to run through our list course objects -->
                     <!-- info on JSTL foreach can be found here:       -->
                     <!-- https://www.tutorialspoint.com/jsp/jstl_core_foreach_tag.htm -->
-                    <div style="">
-                        <ul id="courseSelection" class="btn-group">
+                    
+                    <table class="table table-hover pt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="1"><i class="fas fa-check"></i></th>
+                                <th scope="col" colspan="3">Class Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <c:forEach var='course' items='${courses}'>
-                                    <li>                                    
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">
                                         <input id="${course.courseId}" class="crsCheckbox" type="checkbox" id="${course.courseId}" name="checked" value="${course.courseId}" onclick="enableBtn();"/>
+                                    </td>
+                                    <td>
                                         <label class="checkLabel" for='${course.courseId}'>${course.courseName}</label>                                    
-                                    </li>
+                                    </td>
+                                </tr>
                             </c:forEach>
-                        </ul> 
-                    </div>                    
+                        </tbody>
+                    </table>
+                                      
                     <div class="text-center">
                         <input type="submit" value="Display Classes" id="disabledBtn">    
                     </div>

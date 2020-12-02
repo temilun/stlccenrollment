@@ -45,6 +45,8 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://aa14p9sg8t8pzcx.c01mp3wbbfje.us-east-2.rds.amazonaws.com:3306/stlccenrollment?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">admin</property>
     <property name="hibernate.connection.password">Pin&gt;run9</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
     <mapping class="business.Students"/>
     <mapping class="business.Advisor"/>
     <mapping class="business.Building"/>
@@ -59,7 +61,6 @@ Contributor(s):
     <mapping class="business.Section"/>
     <mapping class="business.Semester"/>
     <mapping class="business.Transcript"/>
-    <mapping class="business.Enroll" />
-    
+    <mapping class="business.Enroll"/>
   </session-factory>
 </hibernate-configuration>

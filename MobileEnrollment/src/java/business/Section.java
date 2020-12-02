@@ -5,7 +5,6 @@
  */
 package business;
 
-import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -15,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -64,6 +62,13 @@ public class Section {
     @Temporal(TemporalType.TIME)
     private Date endTime;
     
+    @JoinColumn(name = "camp_id", referencedColumnName = "camp_id")
+    @ManyToOne( targetEntity = Campus.class)
+    private Campus campusId;
+    
+    @JoinColumn(name = "camp_id", insertable=false, updatable=false)
+    @ManyToOne(targetEntity = Campus.class)
+    private Campus campus;
     
     @Column(name = "enroll_tot")
     private String enrollTot;
@@ -154,14 +159,6 @@ public class Section {
         this.endTime = endTime;
     }
 
-    /* public String getEnrollAvail() {
-        return enrollAvail;
-    } */
-
-    /* public void setEnrollAvail(String enrollAvail) {
-        this.enrollAvail = enrollAvail;
-    } */
-
     public String getEnrollTot() {
         return enrollTot;
     }
@@ -216,6 +213,22 @@ public class Section {
 
     public void setEnrollCollection(Collection<Enroll> enrollCollection) {
         this.enrollCollection = enrollCollection;
+    }
+
+    public Campus getCampusId() {
+        return campusId;
+    }
+
+    public void setCampusId(Campus campusId) {
+        this.campusId = campusId;
+    }
+
+    public Campus getCampus() {
+        return campus;
+    }
+
+    public void setCampus(Campus campus) {
+        this.campus = campus;
     }
 
     

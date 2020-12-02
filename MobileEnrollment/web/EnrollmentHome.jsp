@@ -19,10 +19,10 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" integrity="sha384-9/D4ECZvKMVEJ9Bhr3ZnUAF+Ahlagp1cyPC7h5yDlZdXs4DQ/vRftzfd+2uFUuqS" crossorigin="anonymous"></script>
        
         <title>Enrollment Home - Search for classes</title>
    
-        </style>
 
     </head>
     <c:if test="${!s.authenticated} ">
@@ -51,7 +51,7 @@
                       <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart (${cartSections.size()})</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
@@ -69,6 +69,7 @@
                 <form action="SelectClasses">
                     <div  id="sectionHead">
                         <h3>Select a Term</h3>
+                        <small class="form-text text-muted pb-1">Choose the term you want to register for.</small>
                     </div>
                     <ul id="termSelection" class="btn-group pb-4">
                         <li>
@@ -91,11 +92,11 @@
                         </div>
                         <ul>
                             <li>
-                                <input id="progSearch" class="termbtn" type="radio" name="search" value="progSearch" onclick="showProgs(); enableBtn();" required/>
+                                <input id="progSearch" class="termbtn" type="radio" name="searchType" value="progSearch" onclick="showProgs(); enableBtn();" required/>
                                 <label id="termLabel" for="progSearch">Search by Degree/Program</label>
                             </li>
                             <li>
-                                <input id="advSearch" class="termbtn" type="radio" name="search" value="advSearch" onclick="showAdvSearch(); enableBtn();" required/>
+                                <input id="advSearch" class="termbtn" type="radio" name="searchType" value="advSearch" onclick="showAdvSearch();" required/>
                                 <label id="termLabel" for="advSearch">Advanced Search</label>
                             </li>
                         </ul>
@@ -104,11 +105,11 @@
                     <div id="deptDiv" style="display: none;" class="pb-4">
                         <div id="sectionHead">
                             <h3>Search by Degree/Certificate</h3>
-                            <small class="form-text text-muted pb-1">Please select your Degree/Certificate program from the dropdown.</small>
+                            <small class="form-text text-muted pb-1">Please select your Degree/Certificate program from the dropdown. Alternatively, select "Search by my program" to view all classes required to complete your degree.</small>
                         </div>
-                        <div class="deptSelect" style="width:80%;">
+                        <div class="deptSelect px-3" style="width:80%;">
                             <select id="progID" name="progID">
-                                <option value="0">Select your degree or program</option>
+                                <option disabled selected value>Select a program</option>
                                 <c:forEach var='prog' items='${progs}'>
                                     <option value="${prog.progId}">${prog.progName}</option>
                                 </c:forEach>    
@@ -117,8 +118,67 @@
                     </div>
                    
                     <div id="advDiv" style="display: none;" class="pb-4">
-                        <div id="sectionHead">
+                        <div id="sectionHead" class="pb-3">
                             <h3>Advanced Search</h3>
+                            <small class="form-text text-muted">All fields optional.</small>
+                        </div>
+                        <div class="SubjectSearch px-3">
+                            <label for="course_sub" id="termLabel">Subject (Select one or many)</label>
+                            <select id="course_sub" class="w-100" name="course_subject" onchange="enableBtn();" multiple>
+                                <option disabled selected value>Subject(s) Select</option>
+                                <c:forEach var='subject' items='${subjects}'>
+                                    <option value="${subject}">${subject}</option>
+                                </c:forEach>    
+                            </select>
+                        </div>
+                        <div id="campusIdSelect" class="p-3">
+                            <label for="campusId" id="termLabel">Campus</label>
+                            <select id="campusId" class="w-100" name="campusId" onchange="enableBtn();">
+                                <option disabled selected value>Campus Select</option>
+                                <c:forEach var='campus' items='${campuses}'>
+                                    <option value="${campus.campId}">${campus.campName}</option>
+                                </c:forEach>    
+                            </select>
+                        </div>
+                        <div id="timeSearchDiv" class="px-3">
+                            <table id="timeSearchTable" class="w-100 text-left">
+                                <tr>
+                                    <td>
+                                        <label for="startTime" id="termLabel">Start Time</label>
+                                    </td>
+                                    <td>
+                                        <label for="endTime" id="termLabel">End Time</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="time" id="startTime" name="startTime" min="08:00" max="21:00" class="w-100" onchange="enableBtn();">
+                                    </td>
+                                    <td>
+                                        <input type="time" id="endTime" name="endTime" min="08:00" max="22:00" class="w-100" onchange="enableBtn();">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="termTypeSelect" class="p-3">
+                            <label for="termType" id="termLabel">Term Type</label>
+                            <select id="termType" class="w-100" name="termType" onchange="enableBtn();">
+                                <option selected disabled>Term Type Select</option>
+                                <option value="FT">Full Term</option>
+                                <option value="1H">First Half</option>
+                                <option value="2H">Second Half</option>
+                                <option value="SOS">Spring Off Schedule</option>
+                                <option value="12W">12 Week</option>
+                            </select>
+                        </div>
+                        <div id="classTypeSelect" class="p-3">
+                            <label for="classType" id="termLabel">Class Type</label>
+                            <select id="classType" class="w-100" name="classType" onchange="enableBtn();">
+                                <option selected disabled>Class Type Select</option>
+                                <option value="In-Class">In-Class</option>
+                                <option value="LVL">Live Virtual Lecture</option>
+                                <option value="Internet">Internet</option>
+                            </select>
                         </div>
                     </div>
                     

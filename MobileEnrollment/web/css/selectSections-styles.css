@@ -15,6 +15,9 @@
     color: #1d3d70;
 }
 
+#crsName {
+    font-size: 2em;
+}
 
 .sectionHead {
     padding: 0 15px;
@@ -33,38 +36,6 @@
     outline: none;
 }
 
-.checkLabel {
-    font-family: 'Rubik', sans-serif;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.crsCheckbox {
-    visibility: hidden;
-    overflow: auto;
-}
-
-#courseSelection {
-    display: block;
-    columns: 1;
-    -webkit-columns: 1;
-    -moz-columns: 1;
-    list-style: none;
-}
-
-#courseSelection li {
-    display: block;
-}
-
-input[type=checkbox]:checked + label {
-    border-bottom: 4px solid #1d3d70;
-    transition: .1s;
-}
-
-.form-group {
-    padding-top: 30px;
-}
-
 body {
     font-family: 'Karla', sans-serif;
 }
@@ -75,7 +46,7 @@ h1 {
 }
 
 #searchBtn {
-    paddint-top: 50px;
+    padding-top: 50px;
     margin-top: 15px;
     border: none;
     background-color: #1d3d70;
@@ -85,7 +56,7 @@ h1 {
 }
 
 #disabledBtn {
-    paddint-top: 50px;
+    padding-top: 50px;
     margin-top: 15px;
     border: none;
     background-color: #999999;
