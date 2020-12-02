@@ -35,28 +35,29 @@ public class EnrollDB {
         if (q.list().size() != 0) {
             return false;
         }
-    } catch(Exception e) {
-        System.out.println("EnrollDB data checking error: " + e.getMessage());
-    } finally {
-        session.close();
-    }
-    
-    //Adding Enroll object to table
-    try {
-        //opening the Hibernate session
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(enr);
-        session.getTransaction().commit();
-        dbstat = true;
-    } catch (Exception e) {
-        if (session != null) {
-            session.getTransaction().rollback();
+        
+        } catch(Exception e) {
+            System.out.println("EnrollDB data checking error: " + e.getMessage());
+        } finally {
+            session.close();
         }
-    } finally {
-        session.close();
+
+        //Adding Enroll object to table
+        try {
+            //opening the Hibernate session
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.save(enr);
+            session.getTransaction().commit();
+            dbstat = true;
+        } catch (Exception e) {
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return dbstat;
     }
-    return dbstat;
-}
     
 }
