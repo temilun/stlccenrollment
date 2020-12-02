@@ -6,7 +6,6 @@
 package business;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,12 +32,23 @@ public class AdvSearchDB {
             //creating a criteria alias to access nested Course object
             criteria.createAlias("course", "course");
             criteria.createAlias("campus", "campus");
-            //if subject is not null, find sections with the course subject of <subject>
+            
+            // --- Creating a query with the Criteria API in Hibernate ---
+            //
+            // - We are using the Criteria API because we need to create dynamic
+            //   queries for the advanced search feature.
+            // - For each of the search parameters, we check to see if it is
+            //   not null (left blank on the form).
+            // - If the parameter is not null, we add the criteria to our
+            //   Criteria object.
+            //
+            // - For more on creating queries with the Criteria API see:
+            //   https://docs.jboss.org/hibernate/core/3.3/reference/en-US/html/querycriteria.html
+            
             if (subjects != null) {
                 criteria.add(Restrictions.in("course.courseSub", subjects));
             }
             if (start != null) {
-                //Date start = sdf.parse(startTime);
                 criteria.add(Restrictions.like("startTime", start));
             }
             if (end != null) {
