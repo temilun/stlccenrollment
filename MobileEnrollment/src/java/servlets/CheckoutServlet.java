@@ -54,6 +54,8 @@ public class CheckoutServlet extends HttpServlet {
             s = (Students)request.getSession().getAttribute("s");
             String stu_id = s.getStuId();
 
+            
+            //Jon's cart date/time validation
             //this should check if any classes in the cart happen at the same time
             for (int j = 0; j < secs.size() - 1; j++) {
                 for (int k = j + 1; k < secs.size(); k++) {
@@ -65,7 +67,7 @@ public class CheckoutServlet extends HttpServlet {
                         for (char c2:days2) {
                             if (c == c2) {
                                 if (isOverlapping(secs.get(j).getStartTime(), secs.get(j).getEndTime(), secs.get(k).getStartTime(), secs.get(k).getEndTime())) {
-                                    msg += secs.get(j).getCrn() + " " + secs.get(j).getCourse() + " occurs at the same time as " + secs.get(k).getCrn() + " " + secs.get(k).getCourse() + "<br>";
+                                    msg += secs.get(j).getCrn() + " " + secs.get(j).getCourse().getCourseName() + " occurs at the same time as " + secs.get(k).getCrn() + " " + secs.get(k).getCourse().getCourseName() + "<br>";
                                     URL = "/Cart.jsp";
                                 }
                             }
@@ -74,25 +76,27 @@ public class CheckoutServlet extends HttpServlet {
                 }
             }
             
+            //Jon's date/time validation with the database
             //this compares classes in the cart to already-registered classes
-            
             //grabbing the sessionfactory object from our hibernate utility
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = null;
             List<Section> sections;
-            List<Enroll> existingEnroll;
+            List<Enroll> enrolled;
 
             try {
                 session = sessionFactory.openSession();
                 String qs = "from Enroll where stuId = :stuId";
                 Query q = session.createQuery(qs);
-                q.setString("stuId", enr.getStuId());
-                if (q.list().size() != 0) {
+                q.setString("stuId", stu_id);
+                
+                enrolled = q.list();
+                
+                if (enrolled != null) {
                        
-                    List<Enroll> enrolled = q.list();
                        
-                    for (int j = 0; j < secs.size() - 1; j++) {
-                        for (int k = 0; k < enrolled.size() - 1; k++) {
+                    for (int j = 0; j < secs.size(); j++) {
+                        for (int k = 0; k < enrolled.size(); k++) {
                         
                             char[] days1 = secs.get(j).getDays().toCharArray();
                             char[] days2 = enrolled.get(k).getSection().getDays().toCharArray();
@@ -101,7 +105,7 @@ public class CheckoutServlet extends HttpServlet {
                                 for (char c2:days2) {
                                     if (c == c2) {
                                         if (isOverlapping(secs.get(j).getStartTime(), secs.get(j).getEndTime(), enrolled.get(k).getSection().getStartTime(), enrolled.get(k).getSection().getEndTime())) {
-                                            msg += secs.get(j).getCrn() + " " + secs.get(j).getCourse() + " occurs at the same time as your previously enrolled class, " + enrolled.get(k).getCrn() + " " + enrolled.get(k).getSection().getCourse() + "<br>";
+                                            msg += secs.get(j).getCrn() + " " + secs.get(j).getCourse().getCourseName() + " occurs at the same time as your previously enrolled class, " + enrolled.get(k).getCrn() + " " + enrolled.get(k).getSection().getCourse().getCourseName() + "<br>";
                                             URL = "/Cart.jsp";
                                         }
                                     }
@@ -111,6 +115,7 @@ public class CheckoutServlet extends HttpServlet {
                     }
                 }
             } catch(Exception e) {
+                msg = "EnrollDB data checking error: " + e.getMessage();
                 System.out.println("EnrollDB data checking error: " + e.getMessage());
             } finally {
                 session.close();
@@ -155,6 +160,7 @@ public class CheckoutServlet extends HttpServlet {
         disp.forward(request, response);        
         
     }
+    
     
     public static boolean isOverlapping(Date start1, Date end1, Date start2, Date end2) {
         return start1.before(end2) && start2.before(end1);

@@ -103,7 +103,12 @@
                                                 <h4><strong>Section Information:</strong></h4>
                                                 <h6>Course Code: ${section.course.subAbbrev} ${section.course.courseLevel}</h6>
                                                 <h6>CRN: ${section.crn}</h6>
-                                                <h6>Professor: ${section.professor.profFname} ${section.professor.profLname}</h6>
+                                                <h6>
+                                                    Professor:
+                                                    <a href="" style="color:blue" data-toggle="modal" data-target="#modalContactForm">
+                                                        ${section.professor.profFname} ${section.professor.profLname} <i class="fas fa-envelope"></i>
+                                                    </a>
+                                                </h6>
                                                 <c:if test="${not empty section.days}"><h6>Days of the week: ${section.days}</h6></c:if>
                                                 <c:if test="${not empty section.startTime}">
                                                     <h6>Time: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${section.endTime}" /></h6>
@@ -118,6 +123,49 @@
                                 </div> 
                         </c:forEach>
                     </table>
+                    
+                    <!-- Jon made this popup email modal -->
+                    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body mx-3">
+                                    <div class="md-form mb-5">
+                                        <i class="fas fa-user prefix grey-text"></i>
+                                        <input type="text" id="form34" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                                    </div>
+
+                                    <div class="md-form mb-5">
+                                        <i class="fas fa-envelope prefix grey-text"></i>
+                                        <input type="email" id="form29" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                                    </div>
+
+                                    <div class="md-form mb-5">
+                                        <i class="fas fa-tag prefix grey-text"></i>
+                                        <input type="text" id="form32" class="form-control validate">
+                                        <label data-error="wrong" data-success="right" for="form32">Subject</label>
+                                    </div>
+
+                                    <div class="md-form">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+                                        <label data-error="wrong" data-success="right" for="form8">Your message</label>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-unique">Send <i class="far fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <c:if test="${not empty msg}">
                         <div class="card border-success mb-3 mx-auto info" style="width: 80%;">
