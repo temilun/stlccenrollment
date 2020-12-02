@@ -88,7 +88,7 @@ public class CheckoutServlet extends HttpServlet {
                     if (enrolled != null) {
 
 
-                        for (int j = 0; j < secs.size() - 1; j++) {
+                        for (int j = 0; j < secs.size(); j++) {
                             if (secs.get(j).getDays()!= null) {
                                     for (int k = 0; k < enrolled.size(); k++) {
                                         if (enrolled.get(k).getSection().getDays() != null) {
