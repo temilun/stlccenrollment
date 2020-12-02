@@ -64,13 +64,6 @@
                 <small class="pl-3">Review your courses and checkout</small>
             </div>
             <div id="mainForm">
-                <c:if test="${not empty msg}">
-                  <div class="card-header text-success">Notification</div>
-                      <div class="card-body text-success">
-                          <p class="card-text">${msg}</p>
-                      </div>
-                  </div>  
-                </c:if>
                 <c:choose>
                     <c:when test="${not empty cartSections}">
                         <form action="CheckoutServlet">
@@ -191,7 +184,17 @@
                         </div>
                     </c:otherwise>
                 </c:choose>
-
+                
+                <c:if test="${not empty msg}">
+                    <div class="card border-success my-3 mx-auto info" style="width:80%;">
+                        <div class="card-header text-success">Notification</div>
+                            <div class="card-body text-success">
+                                <p class="card-text">${msg}</p>
+                            </div>
+                        </div>  
+                    </div>
+                    
+                </c:if>
                 
                 <div class="text-center" id="links">
                     <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>

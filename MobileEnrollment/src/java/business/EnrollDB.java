@@ -32,7 +32,7 @@ public class EnrollDB {
         Query q = session.createQuery(qs);
         q.setString("crn", enr.getCrn());
         q.setString("stuId", enr.getStuId());
-        if (q.list().size() != 0) {
+        if (!q.list().isEmpty()) {
             return false;
         }
         
