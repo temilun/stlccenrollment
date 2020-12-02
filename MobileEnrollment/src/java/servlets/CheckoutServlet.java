@@ -7,6 +7,7 @@ package servlets;
 
 import business.Enroll;
 import business.EnrollDB;
+import business.HibernateUtil;
 import business.Section;
 import business.Students;
 import java.io.IOException;
@@ -18,10 +19,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
- * @author jonat
+ * @author Jonathan Smith
  */
 public class CheckoutServlet extends HttpServlet {
 
@@ -44,22 +48,74 @@ public class CheckoutServlet extends HttpServlet {
         List<Enroll> enrollList = new ArrayList();
         
         
+        
         try {
             secs = (List<Section>)request.getSession().getAttribute("cartSections");
             s = (Students)request.getSession().getAttribute("s");
             String stu_id = s.getStuId();
-            
-            //this should check if any classes in cart happen at the exact same time. additional checking is needed.
+
+            //this should check if any classes in the cart happen at the same time
             for (int j = 0; j < secs.size() - 1; j++) {
                 for (int k = j + 1; k < secs.size(); k++) {
-                    if (secs.get(j).getDays().equals(secs.get(k).getDays())) {
-                        if (secs.get(j).getStartTime().equals(secs.get(k).getStartTime())) {
-                            msg += secs.get(j).getCrn() + " occurs at the same time as " + secs.get(k).getCrn() + "<br>";
-                            URL = "/Cart.jsp";
+                    
+                    char[] days1 = secs.get(j).getDays().toCharArray();
+                    char[] days2 = secs.get(k).getDays().toCharArray();
+                    
+                    for (char c:days1) {
+                        for (char c2:days2) {
+                            if (c == c2) {
+                                if (isOverlapping(secs.get(j).getStartTime(), secs.get(j).getEndTime(), secs.get(k).getStartTime(), secs.get(k).getEndTime())) {
+                                    msg += secs.get(j).getCrn() + " " + secs.get(j).getCourse() + " occurs at the same time as " + secs.get(k).getCrn() + " " + secs.get(k).getCourse() + "<br>";
+                                    URL = "/Cart.jsp";
+                                }
+                            }
                         }
                     }
                 }
             }
+            
+            //this compares classes in the cart to already-registered classes
+            
+            //grabbing the sessionfactory object from our hibernate utility
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = null;
+            List<Section> sections;
+            List<Enroll> existingEnroll;
+
+            try {
+                session = sessionFactory.openSession();
+                String qs = "from Enroll where stuId = :stuId";
+                Query q = session.createQuery(qs);
+                q.setString("stuId", enr.getStuId());
+                if (q.list().size() != 0) {
+                       
+                    List<Enroll> enrolled = q.list();
+                       
+                    for (int j = 0; j < secs.size() - 1; j++) {
+                        for (int k = 0; k < enrolled.size() - 1; k++) {
+                        
+                            char[] days1 = secs.get(j).getDays().toCharArray();
+                            char[] days2 = enrolled.get(k).getSection().getDays().toCharArray();
+                            
+                            for (char c:days1) {
+                                for (char c2:days2) {
+                                    if (c == c2) {
+                                        if (isOverlapping(secs.get(j).getStartTime(), secs.get(j).getEndTime(), enrolled.get(k).getSection().getStartTime(), enrolled.get(k).getSection().getEndTime())) {
+                                            msg += secs.get(j).getCrn() + " " + secs.get(j).getCourse() + " occurs at the same time as your previously enrolled class, " + enrolled.get(k).getCrn() + " " + enrolled.get(k).getSection().getCourse() + "<br>";
+                                            URL = "/Cart.jsp";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch(Exception e) {
+                System.out.println("EnrollDB data checking error: " + e.getMessage());
+            } finally {
+                session.close();
+            }
+            
             
             if (msg.isEmpty()) {
                 for (Section i : secs) {
@@ -70,6 +126,7 @@ public class CheckoutServlet extends HttpServlet {
                     enrollList.add(enr);
                 }
             }
+        
         } catch (Exception e) {
             msg += "Error on Checkout Servlet: " + e.getMessage();
         }
@@ -97,6 +154,10 @@ public class CheckoutServlet extends HttpServlet {
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);        
         
+    }
+    
+    public static boolean isOverlapping(Date start1, Date end1, Date start2, Date end2) {
+        return start1.before(end2) && start2.before(end1);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -90,6 +90,8 @@
                     more information about your advisor, click 
                     <a href="https://stlcc.edu/admissions/advising/virtual-advising.aspx" target="_blank">
                         HERE!
+                    </a></p>
+
                     </a>
                     <br>
                     To email your advisor directly, click <a href="" data-toggle="modal" data-target="#modalContactForm">HERE!</a>
@@ -103,6 +105,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body mx-3">
+
+                                    <div class="modal-body mx-3 text-center">
                                         <div class="md-form mb-5">
                                             <i class="fas fa-user prefix grey-text"></i>
                                                 <input type="text" id="form34" class="form-control validate">
