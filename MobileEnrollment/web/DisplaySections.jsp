@@ -165,7 +165,6 @@
                                                     </td>
                                                     <td>${section.secType}</td>
                                                     <td>${section.enrollAvail}</td>
-<<<<<<< HEAD
                                                     <td>
                                                         <c:if test="${section.termType == 'FT'}">
                                                             Full Term
@@ -183,7 +182,7 @@
                                                             Spring Off Schedule
                                                         </c:if>
                                                     </td>
-=======
+
                                                     <!-- Jon did the contact form here -->
                                                     <td>
                                                         <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -231,7 +230,6 @@
                                                         <div class="text-center">
                                                         <a href="" style="color:blue" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">${section.professor.profFname} ${section.professor.profLname}</a>
                                                         </div>
->>>>>>> AddEmailFormToAdvisors/Professors
                                                 </tr>
                                         </c:if>
                                     </c:forEach>
