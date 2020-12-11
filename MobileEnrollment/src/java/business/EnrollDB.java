@@ -16,31 +16,34 @@ import org.hibernate.SessionFactory;
  */
 public class EnrollDB {
 
+    public static boolean isRegistered(Enroll enr) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
+        
+        try {
+            session = sessionFactory.openSession();
+            String qs = "FROM Enroll WHERE crn = :crn AND stuId = :stuId";
+            Query q = session.createQuery(qs);
+            q.setString("crn", enr.getCrn());
+            q.setString("stuId", enr.getStuId());
+            if (!q.list().isEmpty()) {
+                return true;
+            }
+        } catch(Exception e) {
+            return true;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+            
+        }
+        return false;
+    }
     
     public static boolean persistSection (Enroll enr) {
-            //grabbing the sessionfactory object from our hibernate utility
-    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    Session session = null;
-    List<Section> sections;
-    List<Enroll> existingEnroll;
-    boolean dbstat = false;
-    
-    //Checking to see if section is already in database with this stuid
-    try {
-        session = sessionFactory.openSession();
-        String qs = "from Enroll where crn = :crn and stuId = :stuId";
-        Query q = session.createQuery(qs);
-        q.setString("crn", enr.getCrn());
-        q.setString("stuId", enr.getStuId());
-        if (!q.list().isEmpty()) {
-            return false;
-        }
-        
-        } catch(Exception e) {
-            System.out.println("EnrollDB data checking error: " + e.getMessage());
-        } finally {
-            session.close();
-        }
+                //grabbing the sessionfactory object from our hibernate utility
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
 
         //Adding Enroll object to table
         try {
@@ -49,7 +52,6 @@ public class EnrollDB {
             session.beginTransaction();
             session.save(enr);
             session.getTransaction().commit();
-            dbstat = true;
         } catch (Exception e) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -57,7 +59,7 @@ public class EnrollDB {
         } finally {
             session.close();
         }
-        return dbstat;
+        return true;
     }
     
 }

@@ -117,20 +117,27 @@ public class CheckoutServlet extends HttpServlet {
                     session.close();
                 }
 
-
                 if (msg.isEmpty()) {
                     for (Section i : secs) {
                         enr = new Enroll();
                         enr.setCrn(i.getCrn());
                         enr.setStuId(s.getStuId());
                         enr.setEnrollDate(new Date());
+                        enr.setSection(i);
                         enrollList.add(enr);
+                    }
+                    
+                    for (Enroll e : enrollList) {
+                        if (EnrollDB.isRegistered(enr)) {
+                            msg += "You are already enrolled for " + enr.getSection().getCourse().getCourseName() + "!";
+                        }
                     }
                 }
 
         } catch (Exception e) {
             msg += "Error on Checkout Servlet: " + e.getMessage();
         }
+        
         
         try {
             if (msg.isEmpty()) {
