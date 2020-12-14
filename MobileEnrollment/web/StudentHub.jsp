@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
  <html>
     <head>
@@ -74,7 +76,90 @@
             </div>  
         </c:if>
             
+        <c:if test="${not empty schedule}">
+            <c:set var="times" value="${fn:split('8,9,10,11,12,1,2,3,4,5,6,7,8,9', ',')}" scope="application" />
 
+            <c:set var="days" value="${fn:split('M,T,W,R,F', ',')}" scope="application" />
+            <div class="card bg-light mb-3 mx-auto info">
+                <div class="card-header d-flex justify-content-between">
+                    Week at a Glance
+                    <i class="far fa-calendar-alt fa-lg"></i>
+                </div>
+                <div class="card-body">
+                    <table class="" id="calendar">
+                        <thead>
+                            <tr class="calhead">
+                                <th id="time"></th>
+                                <th id="spacer"></th>
+                                <c:forEach var="time" items="${times}">
+                                    <th id="time">${time}</th>
+                                </c:forEach>
+
+                            </tr>
+                        </thead>
+                        <c:forEach var="day" items="${days}">
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td id="day">${day}</td>
+                                <td></td>
+                                <c:forEach begin="8" end="22" varStatus="time">
+                                    <td id="${day}${time.index}" 
+
+                                    <c:forEach var="enr" items="${schedule}">
+                                        <c:choose>
+                                            <c:when test="${(fn:contains(enr.section.days, day) && fn:substring(enr.section.startTime, 0, 2) == time.index)
+                                                            || ((fn:contains(enr.section.days, day) && fn:substring(enr.section.endTime, 0, 2) == time.index)) 
+                                                            || ((fn:contains(enr.section.days, day) && (fn:substring(enr.section.startTime, 0, 2) < time.index) && (fn:substring(enr.section.endTime, 0, 2)) > time.index))}">
+                                                    style="background-color: #${enr.section.crn}c" 
+                                                    onclick='alert(
+                                                        "Class Information \n \nClass: ${enr.section.course.courseName} \nDays: ${enr.section.days} \nTime: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enr.section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enr.section.endTime}" />\nCampus: ${enr.section.campus.campName}\nBuilding: ${enr.section.room.building.buildName}\nRoom: ${enr.section.room.roomId}");'
+                                            </c:when>
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    ></td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </table>            
+                </div>
+            </div>       
+
+            <div class="card bg-light mb-3 mx-auto info">
+                <div class="card-header d-flex justify-content-between">
+                    Enrolled Courses
+                    <i class="fas fa-pencil-alt fa-lg"></i>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Class</th>
+                                <th scope="col">Days</th>
+                                <th scope="col" class="text-center">Time</th>
+                                <th scope="col">Room</th>
+                            </tr>
+                        </thead>
+                        <c:forEach var="enroll" items="${schedule}">
+                            <tr>
+                                <td>${enroll.section.course.courseName}</td>
+                                <td>${enroll.section.days}</td>
+                                <td class="text-center">
+                                    <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enroll.section.startTime}" /> 
+                                    - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enroll.section.endTime}" />
+                                </td>
+                                <td>B293</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                </div>
+            </div>
+        </c:if>        
+        
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Welcome to the STLCC Registration Portal!</div>
             <div class="card-body">

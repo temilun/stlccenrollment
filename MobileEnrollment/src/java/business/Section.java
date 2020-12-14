@@ -30,9 +30,6 @@ public class Section {
 
     @Column(name = "enroll_avail")
     private Integer enrollAvail;
-    @OneToMany(mappedBy = "crn")
-    private Collection<Enroll> enrollCollection;
-
 
     @Id
     @Basic(optional = false)
@@ -89,6 +86,9 @@ public class Section {
     @ManyToOne(optional = false)
     private Professor professor;
     
+    @JoinColumn(name = "room_id", referencedColumnName="room_id", insertable=false, updatable=false)
+    @ManyToOne(targetEntity = Room.class)
+    private Room room;
 
     public Section() {
         this.crn = "";
@@ -207,14 +207,6 @@ public class Section {
         this.enrollAvail = enrollAvail;
     }
 
-    public Collection<Enroll> getEnrollCollection() {
-        return enrollCollection;
-    }
-
-    public void setEnrollCollection(Collection<Enroll> enrollCollection) {
-        this.enrollCollection = enrollCollection;
-    }
-
     public Campus getCampusId() {
         return campusId;
     }
@@ -229,6 +221,14 @@ public class Section {
 
     public void setCampus(Campus campus) {
         this.campus = campus;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     

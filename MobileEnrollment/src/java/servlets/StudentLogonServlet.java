@@ -1,9 +1,12 @@
 package servlets;
 
+import business.Enroll;
+import business.EnrollDB;
 import business.Students;
 import business.StudentDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +26,7 @@ public class StudentLogonServlet extends HttpServlet {
         String URL = "/Logon.jsp";
         String passatt;
         Students s;
+        List<Enroll> schedule;
         
         try {
             userid = request.getParameter("stuId").trim();
@@ -36,6 +40,8 @@ public class StudentLogonServlet extends HttpServlet {
                 if (!s.isAuthenticated()) {
                     msg = "Unable to authenticate";
                 } else {
+                    schedule = EnrollDB.getSchedule(userid);
+                    request.getSession().setAttribute("schedule", schedule);
                     URL = "/StudentHub.jsp";
                     request.getSession().setAttribute("s", s);
                 }

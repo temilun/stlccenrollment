@@ -34,6 +34,7 @@ public class CheckoutServlet extends HttpServlet {
         Enroll enr = null;
         List<Section> secs = null;
         List<Enroll> enrollList = new ArrayList();
+        List<Enroll> schedule;
         
         try {
             secs = (List<Section>) request.getSession().getAttribute("cartSections");
@@ -89,7 +90,8 @@ public class CheckoutServlet extends HttpServlet {
                         msg += "Error registering for " + e.getSection().getCourse().getCourseName() + ".<br>";
                     }
                 }
-                
+                schedule = EnrollDB.getSchedule(s.getStuId());
+                request.getSession().setAttribute("schedule", schedule);
                 request.getSession().setAttribute("enrollList", enrollList);
                 URL = "/StudentHub.jsp";
                 request.getSession().setAttribute("cartSections", new ArrayList());

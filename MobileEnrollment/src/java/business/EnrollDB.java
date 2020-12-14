@@ -114,6 +114,27 @@ public class EnrollDB {
         return true;
     }
     
+    public static List<Enroll> getSchedule(String stuId) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
+        List<Enroll> schedule;
+        
+        try {
+            session = sessionFactory.openSession();
+            
+            String qs = "FROM Enroll where stuId = :stuId";
+            Query q = session.createQuery(qs);
+            q.setString("stuId", stuId);
+            schedule = q.list();
+            
+        } catch (Exception e) {
+            schedule = null;
+        } finally {
+            session.close();
+        }
+        
+        return schedule;
+    }    
     
     //Jon's isOverlapping method
     public static boolean isOverlapping(Date start1, Date end1, Date start2, Date end2) {
