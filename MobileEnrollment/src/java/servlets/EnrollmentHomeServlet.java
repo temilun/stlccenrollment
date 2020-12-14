@@ -7,14 +7,10 @@ package servlets;
 
 import business.Campus;
 import business.CampusDB;
-import business.Department;
-import business.DepartmentDB;
 import business.Program;
 import business.ProgramDB;
-import business.SectionDB;
 import business.SubjectDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
