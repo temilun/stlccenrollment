@@ -59,3 +59,25 @@ h1 {
 li {
     padding-top: 20px; 
 }
+
+#time {
+    font-size: 13px;
+    min-width: 18px;
+    text-align: left;
+    font-weight: 400;
+}
+
+#spacer {
+    min-width: 8px;
+}
+
+#calendar {
+    width: 100%;
+    margin-left: -10px;
+}
+
+#calendar td {
+    font-weight: 800;
+    text-align: left;
+    height: 25px;
+}

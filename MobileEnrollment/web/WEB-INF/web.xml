@@ -20,6 +20,10 @@
         <servlet-name>AdvancedSearchServlet</servlet-name>
         <servlet-class>servlets.AdvancedSearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteFromScheduleServlet</servlet-name>
+        <servlet-class>servlets.DeleteFromScheduleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SelectClassesServlet</servlet-name>
         <url-pattern>/SelectClasses</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>AdvancedSearchServlet</servlet-name>
         <url-pattern>/AdvancedSearch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFromScheduleServlet</servlet-name>
+        <url-pattern>/DeleteFromSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

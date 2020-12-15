@@ -9,6 +9,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,8 +26,13 @@ public class Room {
     @Basic(optional = false)
     @Column(name = "room_id")
     private String roomId;
+    
     @Column(name = "build_id")
     private String buildId;
+    
+    @JoinColumn(name = "build_id", referencedColumnName = "build_id", insertable=false, updatable=false)
+    @ManyToOne( targetEntity = Building.class)
+    private Building building;
 
     
 
@@ -48,6 +55,14 @@ public class Room {
 
     public void setBuildId(String buildId) {
         this.buildId = buildId;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 
 }

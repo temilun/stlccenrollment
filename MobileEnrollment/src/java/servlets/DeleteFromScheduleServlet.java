@@ -1,9 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
 import business.Enroll;
 import business.EnrollDB;
 import business.Students;
-import business.StudentDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,40 +21,30 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tom
  */
-public class StudentLogonServlet extends HttpServlet {
-
+public class DeleteFromScheduleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String msg = "", userid = "";
-        String URL = "/Logon.jsp";
-        String passatt;
+        String URL = "/MySchedule.jsp", msg = "";
         Students s;
+        String sectionToRemove;
         List<Enroll> schedule;
         
         try {
-            userid = request.getParameter("stuId").trim();
-            s = StudentDB.getStudent(userid);
-            if (s == null){
-                msg = "No student record retrieved <br>";
+            s = (Students) request.getSession().getAttribute("s");
+            sectionToRemove = request.getParameter("delete");
+            
+            if (EnrollDB.deleteFromSchedule(sectionToRemove, s.getStuId())) {
+                msg = "CRN " + sectionToRemove + " successfully removed!";
+                schedule = EnrollDB.getSchedule(s.getStuId());
+                request.getSession().setAttribute("schedule", schedule);
             } else {
-                //msg = "Student " + s.getStuFname() + " " + s.getStuLname() + " found.";
-                passatt = String.valueOf(request.getParameter("password").trim());
-                s.setPassAttempt(passatt);
-                if (!s.isAuthenticated()) {
-                    msg = "Unable to authenticate";
-                } else {
-                    schedule = EnrollDB.getSchedule(userid);
-                    request.getSession().setAttribute("schedule", schedule);
-                    URL = "/StudentHub.jsp";
-                    request.getSession().setAttribute("s", s);
-                }
+                msg = "Error removing CRN " + sectionToRemove + ".";
             }
         } catch (Exception e) {
-            msg = "Exception: " + e.getMessage();
+            msg = "Error on DeleteFromSchedule Servlet: " + e.getMessage();
         }
         
-        request.setAttribute("msg", msg);
+        request.getSession().setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
     }

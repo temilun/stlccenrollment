@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
  <html>
     <head>
@@ -22,7 +24,7 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/Logon.jsp";
+            window.location.href = "/Logon.jsp";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
@@ -36,14 +38,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="https://stlcc.edu">STLCC Home<span class="sr-only">(current)</span></a>
-                  </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
+                      <a class="nav-link active" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub<span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/MySchedule.jsp">My Classes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://stlcc.edu">STLCC Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>
@@ -74,13 +82,65 @@
             </div>  
         </c:if>
             
+        <c:if test="${not empty schedule}">
+            <c:set var="times" value="${fn:split('8,9,10,11,12,1,2,3,4,5,6,7,8,9', ',')}" scope="application" />
 
+            <c:set var="days" value="${fn:split('M,T,W,R,F', ',')}" scope="application" />
+            <div class="card bg-light mb-3 mx-auto info">
+                <div class="card-header d-flex justify-content-between">
+                    Week at a Glance
+                    <i class="far fa-calendar-alt fa-lg"></i>
+                </div>
+                <div class="card-body">
+                    <table class="" id="calendar">
+                        <thead>
+                            <tr class="calhead">
+                                <th id="time"></th>
+                                <th id="spacer"></th>
+                                <c:forEach var="time" items="${times}">
+                                    <th id="time">${time}</th>
+                                </c:forEach>
+
+                            </tr>
+                        </thead>
+                        <c:forEach var="day" items="${days}">
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td id="day">${day}</td>
+                                <td></td>
+                                <c:forEach begin="8" end="22" varStatus="time">
+                                    <td id="${day}${time.index}" 
+
+                                    <c:forEach var="enr" items="${schedule}">
+                                        <c:choose>
+                                            <c:when test="${(fn:contains(enr.section.days, day) && fn:substring(enr.section.startTime, 0, 2) == time.index)
+                                                            || ((fn:contains(enr.section.days, day) && fn:substring(enr.section.endTime, 0, 2) == time.index)) 
+                                                            || ((fn:contains(enr.section.days, day) && (fn:substring(enr.section.startTime, 0, 2) < time.index) && (fn:substring(enr.section.endTime, 0, 2)) > time.index))}">
+                                                    style="background-color: #${enr.section.crn}c" 
+                                                    onclick='alert(
+                                                        "Class Information \n \nClass: ${enr.section.course.courseName} \nDays: ${enr.section.days} \nTime: <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enr.section.startTime}" /> - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enr.section.endTime}" />\nCampus: ${enr.section.campus.campName}\nBuilding: ${enr.section.room.building.buildName}\nRoom: ${enr.section.room.roomId}");'
+                                            </c:when>
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    ></td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </table>            
+                </div>
+            </div>       
+        </c:if>        
+        
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Welcome to the STLCC Registration Portal!</div>
-            <div class="card-body">
-                <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
+                <div class="card-body">
+                    <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
+                </div>
             </div>
-        </div>
         
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Need more help?</div>
@@ -109,13 +169,13 @@
                                     <div class="modal-body mx-3 text-center">
                                         <div class="md-form mb-5">
                                             <i class="fas fa-user prefix grey-text"></i>
-                                                <input type="text" id="form34" class="form-control validate">
+                                                <input type="text" id="form34" class="form-control validate"value='${s.stuFname} ${s.stuLname}' disabled>
                                                     <label data-error="wrong" data-success="right" for="form34">Your name</label>
                                         </div>
                                                                         
                                         <div class="md-form mb-5">
                                             <i class="fas fa-envelope prefix grey-text"></i>
-                                            <input type="email" id="form29" class="form-control validate">
+                                            <input type="email" id="form29" class="form-control validate" value='${s.stuEmail}' disabled>
                                             <label data-error="wrong" data-success="right" for="form29">Your email</label>
                                         </div>
 
