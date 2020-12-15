@@ -67,11 +67,29 @@
         
         <h1 id="studentName" class="h3">${s.stuFname} ${s.stuLname}</h1>
         <div class="text-center">${s.stuId}</div>
+        
+        <c:choose>
+            <c:when test="${empty s.holdId}">
         <div class="text-center">
             <form action="EnrollmentHome">
                 <input type="submit" value="Class Registration" id="regBtn">
             </form>
         </div>
+            </c:when>
+            <c:otherwise>
+                <div class="text-center">
+            <form action="EnrollmentHome">
+                <input type="submit" value="Class Registration" disabled="disabled">
+            </form>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">
+                    You are not able to register for classes 
+                    due to holds on your account. Please speak with
+                    your academic advisor.
+                    </p>
+            </c:otherwise>
+        </c:choose>
             
         <c:if test="${not empty msg}">
             <div class="card border-success mb-3 mx-auto info">
