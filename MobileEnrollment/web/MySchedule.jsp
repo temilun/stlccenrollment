@@ -42,17 +42,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="https://stlcc.edu">STLCC Home<span class="sr-only">(current)</span></a>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="<%=request.getContextPath()%>/MySchedule.jsp">My Classes<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://stlcc.edu">STLCC Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>
                   </li>
                 </ul>
             </div>
@@ -185,19 +191,13 @@
                                 <p class="card-text">${msg}</p>
                             </div>
                         </div>  
-                    </div>
-                    
+                    </div> 
                 </c:if>
                 
                 <div class="text-center" id="links">
-                    <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
-                </div> 
-                
-                
+                    <a href="./StudentHub.jsp">Back to Student Hub</a>
+                </div>                 
             </div>
-        </div>
-        
-        <script src="./js/displaySections.js"></script>
     </body>
     </c:if>
 </html>

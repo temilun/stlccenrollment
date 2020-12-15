@@ -42,17 +42,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="https://stlcc.edu">STLCC Home<span class="sr-only">(current)</span></a>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if><span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/MySchedule.jsp">My Classes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://stlcc.edu">STLCC Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/StudentHub.jsp">Student Hub</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="<%=request.getContextPath()%>/Logon.jsp">Logout</a>
+                      <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>
                   </li>
                 </ul>
             </div>
@@ -140,14 +146,14 @@
                                         <div class="modal-body mx-3">
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-user prefix grey-text"></i>
-                                                <input type="text" id="form34" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="form34" value='${s.stuFname} ${s.stuLname}' disabled>Your name</label>
+                                                <input type="text" id="form34" class="form-control validate" value='${s.stuFname} ${s.stuLname}' disabled>
+                                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
                                             </div>
 
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-envelope prefix grey-text"></i>
-                                                <input type="email" id="form29" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="form29" value='${s.stuEmail}'>Your email</label>
+                                                <input type="email" id="form29" class="form-control validate" value='${s.stuEmail}' disabled>
+                                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
                                             </div>
 
                                             <div class="md-form mb-5">
