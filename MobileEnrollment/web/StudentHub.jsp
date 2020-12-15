@@ -88,6 +88,12 @@
                     due to holds on your account. Please speak with
                     your academic advisor.
                     </p>
+                    <p class="text-center">
+                    Hold Type:                   
+                    <td>${s.holdId.holdDesc}</td>
+                    </p>
+                </div>
+                     
             </c:otherwise>
         </c:choose>
             
