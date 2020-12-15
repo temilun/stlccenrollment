@@ -55,10 +55,10 @@ public class CheckoutServlet extends HttpServlet {
                 if (EnrollDB.isRegistered(e)) {
                     msg += "You are already enrolled for " + e.getSection().getCourse().getCourseName() + "! <br><br>";
                 }
-                
-                if (!msg.isEmpty()) {
-                    msg += "Please fix any cart conflicts and retry.";
-                }
+            }
+            
+            if (!msg.isEmpty()) {
+                msg += "Please fix any cart conflicts and retry.";
             }
             
             if (msg.isEmpty()) {

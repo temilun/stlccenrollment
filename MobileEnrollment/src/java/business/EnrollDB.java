@@ -72,7 +72,7 @@ public class EnrollDB {
                                         for (char c2:days2) {
                                             if (c == c2) {
                                                 if (isOverlapping(secs.get(j).getStartTime(), secs.get(j).getEndTime(), enrolled.get(k).getSection().getStartTime(), enrolled.get(k).getSection().getEndTime())) {
-                                                    msg += secs.get(j).getCourse().getCourseName() + " occurs at the same time as your previously enrolled class, " + enrolled.get(k).getCrn() + " " + enrolled.get(k).getSection().getCourse().getCourseName() + "<br><br>";
+                                                    msg += secs.get(j).getCourse().getCourseName() + " occurs at the same time as your previously enrolled class, " + enrolled.get(k).getSection().getCourse().getCourseName() + "<br><br>";
                                                     break innerLoop;
                                                 }
                                             }

@@ -184,11 +184,11 @@
                     </c:otherwise>
                 </c:choose>
                 
-                <c:if test="${not empty msg}">
+                <c:if test="${not empty deletedSection}">
                     <div class="card border-success my-3 mx-auto info" style="width:80%;">
                         <div class="card-header text-success">Notification</div>
                             <div class="card-body text-success">
-                                <p class="card-text">${msg}</p>
+                                <p class="card-text">${deletedSection}</p>
                             </div>
                         </div>  
                     </div> 

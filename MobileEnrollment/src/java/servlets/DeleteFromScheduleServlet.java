@@ -44,7 +44,7 @@ public class DeleteFromScheduleServlet extends HttpServlet {
             msg = "Error on DeleteFromSchedule Servlet: " + e.getMessage();
         }
         
-        request.getSession().setAttribute("msg", msg);
+        request.getSession().setAttribute("deletedSection", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
     }
