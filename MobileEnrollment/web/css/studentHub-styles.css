@@ -56,6 +56,17 @@ h1 {
     color: white;
 }
 
+#disabledBtn {
+    paddint-top: 50px;
+    margin-top: 15px;
+    border: none;
+    background-color: #999999;
+    border-radius: 50px;
+    padding: 15px 30px;
+    color: white;
+    cursor: not-allowed;
+}
+
 li {
     padding-top: 20px; 
 }

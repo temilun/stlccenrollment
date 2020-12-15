@@ -67,11 +67,39 @@
         
         <h1 id="studentName" class="h3">${s.stuFname} ${s.stuLname}</h1>
         <div class="text-center">${s.stuId}</div>
+        
+        <c:choose>
+            <c:when test="${empty s.holdId}">
         <div class="text-center">
             <form action="EnrollmentHome">
                 <input type="submit" value="Class Registration" id="regBtn">
             </form>
         </div>
+            </c:when>
+            <c:otherwise>
+                <div class="text-center">
+                    <form>
+                        <input type="submit" value="Class Registration" id="disabledBtn" disabled="disabled">
+                    </form>
+                </div>
+                <div class="card border-danger mb-3 mx-auto">
+                    <div class="card-header">Hold on student account</div>
+                    <div class="card-body text-danger">
+                        <h5 class="card-title">Hold Type: ${s.holdId.holdDesc}</h5>
+                        <p class="card-text">
+                        You are not able to register for classes 
+                        due to holds on your account. Please speak with
+                        your academic advisor.<br><br>
+                        To email your advisor directly, click 
+                        <a href="" data-toggle="modal" data-target="#modalContactForm">HERE!</a>
+                        </p>
+                    </div>
+                </div>
+                
+                     
+            </c:otherwise>
+        </c:choose>
+        
             
         <c:if test="${not empty msg}">
             <div class="card border-success mb-3 mx-auto info">
@@ -159,7 +187,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
-                                        <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+                                        <h4 class="modal-title w-100 font-weight-bold">Email your advisor</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>

@@ -78,6 +78,10 @@ public class Students implements Serializable {
     private Program progId;
     @OneToMany(mappedBy = "stuId")
     private Collection<Transcript> transcriptCollection;
+    
+    @JoinColumn(name = "hold_id", referencedColumnName = "hold_id")
+    @ManyToOne
+    private Holds holdId;
 
     public Students() {
         this.stuFname = "";
@@ -237,6 +241,14 @@ public class Students implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    public Holds getHoldId() {
+        return holdId;
+    }
+
+    public void setHold(Holds holdId) {
+        this.holdId = holdId;
     }
 
     /*public Collection<Enroll> getEnrollCollection() {
