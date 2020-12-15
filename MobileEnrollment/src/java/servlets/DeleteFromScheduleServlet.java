@@ -5,10 +5,11 @@
  */
 package servlets;
 
-import business.Section;
+import business.Enroll;
+import business.EnrollDB;
+import business.Students;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,39 +21,32 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tom
  */
-public class DeleteSectionServlet extends HttpServlet {
+public class DeleteFromScheduleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        String URL = "/Cart.jsp", msg = "";
-        String sectionToDelete = "";
-        List<Section> cartSections = null;
-        List<Section> newSections = null;
-       
-        
+        String URL = "/MySchedule.jsp", msg = "";
+        Students s;
+        String sectionToRemove;
+        List<Enroll> schedule;
         
         try {
-            sectionToDelete = request.getParameter("delete");
-            cartSections = (List<Section>) request.getSession().getAttribute("cartSections");
+            s = (Students) request.getSession().getAttribute("s");
+            sectionToRemove = request.getParameter("delete");
             
-            for ( Section sec : cartSections ) {
-                if (sec.getCrn().equals(sectionToDelete)) {
-                    cartSections.remove(sec);
-                    newSections = cartSections;
-                    msg += sec.getCourse().getCourseName() + " CRN " + sec.getCrn() + " removed from cart. <br>";
-                    request.getSession().setAttribute("cartSections", newSections);
-                }
+            if (EnrollDB.deleteFromSchedule(sectionToRemove, s.getStuId())) {
+                msg = "CRN " + sectionToRemove + " successfully removed!";
+                schedule = EnrollDB.getSchedule(s.getStuId());
+                request.getSession().setAttribute("schedule", schedule);
+            } else {
+                msg = "Error removing CRN " + sectionToRemove + ".";
             }
-
         } catch (Exception e) {
-            //msg += "Error on Delete Section Servlet: " + e.getMessage();
+            msg = "Error on DeleteFromSchedule Servlet: " + e.getMessage();
         }
         
-        request.setAttribute("msg", msg);
+        request.getSession().setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

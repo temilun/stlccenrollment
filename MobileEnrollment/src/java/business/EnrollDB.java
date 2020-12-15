@@ -136,6 +136,32 @@ public class EnrollDB {
         return schedule;
     }    
     
+    public static boolean deleteFromSchedule(String crn, String stuId) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = null;
+        Enroll section;
+        
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            String qs = "FROM Enroll WHERE stuId = :stuId AND crn = :crn";
+            Query q = session.createQuery(qs);
+            q.setString("stuId", stuId);
+            q.setString("crn", crn);
+            section = (Enroll) q.uniqueResult();
+            session.delete(section);
+            session.getTransaction().commit();
+            return true;
+        } catch(Exception e) {
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return false;
+    }
+    
     //Jon's isOverlapping method
     public static boolean isOverlapping(Date start1, Date end1, Date start2, Date end2) {
         return start1.before(end2) && start2.before(end1);

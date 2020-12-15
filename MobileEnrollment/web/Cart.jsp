@@ -141,13 +141,13 @@
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-user prefix grey-text"></i>
                                                 <input type="text" id="form34" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="form34">Your name</label>
+                                                <label data-error="wrong" data-success="right" for="form34" value='${s.stuFname} ${s.stuLname}' disabled>Your name</label>
                                             </div>
 
                                             <div class="md-form mb-5">
                                                 <i class="fas fa-envelope prefix grey-text"></i>
                                                 <input type="email" id="form29" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="form29">Your email</label>
+                                                <label data-error="wrong" data-success="right" for="form29" value='${s.stuEmail}'>Your email</label>
                                             </div>
 
                                             <div class="md-form mb-5">

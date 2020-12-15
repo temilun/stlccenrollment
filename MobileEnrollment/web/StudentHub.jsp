@@ -24,7 +24,7 @@
     </head>
     <c:if test="${!s.authenticated} ">
         <script type="text/javascript">
-            window.location = "/Logon.jsp";
+            window.location.href = "/Logon.jsp";
             </script>
         </c:if>
     <c:if test="${s.authenticated}">
@@ -43,6 +43,9 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="https://selfservice.stlcc.edu:9199/SLCC/twbkwbis.P_WWWLogin">Classic Banner</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="<%=request.getContextPath()%>/MySchedule.jsp">My Classes</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<%=request.getContextPath()%>/Cart.jsp">Cart <c:if test="${not empty cartSections}">(${cartSections.size()})</c:if></a>
@@ -127,45 +130,14 @@
                     </table>            
                 </div>
             </div>       
-
-            <div class="card bg-light mb-3 mx-auto info">
-                <div class="card-header d-flex justify-content-between">
-                    Enrolled Courses
-                    <i class="fas fa-pencil-alt fa-lg"></i>
-                </div>
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Class</th>
-                                <th scope="col">Days</th>
-                                <th scope="col" class="text-center">Time</th>
-                                <th scope="col">Room</th>
-                            </tr>
-                        </thead>
-                        <c:forEach var="enroll" items="${schedule}">
-                            <tr>
-                                <td>${enroll.section.course.courseName}</td>
-                                <td>${enroll.section.days}</td>
-                                <td class="text-center">
-                                    <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enroll.section.startTime}" /> 
-                                    - <fmt:formatDate type="time" timeStyle="short" pattern="h:mma" value="${enroll.section.endTime}" />
-                                </td>
-                                <td>B293</td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-
-                </div>
-            </div>
         </c:if>        
         
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Welcome to the STLCC Registration Portal!</div>
-            <div class="card-body">
-                <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
+                <div class="card-body">
+                    <p class="card-text">To register for the Spring 2021 term, please start by clicking the "Class Registration" button above.</p>
+                </div>
             </div>
-        </div>
         
         <div class="card bg-light mb-3 mx-auto info">
             <div class="card-header">Need more help?</div>
