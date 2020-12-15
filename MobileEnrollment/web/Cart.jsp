@@ -203,7 +203,7 @@
                 </c:if>
                 
                 <div class="text-center" id="links">
-                    <a href="./EnrollmentHome.jsp">Back to Enrollment Home</a>
+                    <a href="./StudentHub.jsp">Back to Student Hub</a>
                 </div> 
                 
                 
