@@ -9,7 +9,12 @@ import business.Section;
 import business.SectionDB;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,14 +48,18 @@ public class AddToCartServlet extends HttpServlet {
             
             if (existingSections == null) {
                 sections = SectionDB.getSectionsByCRN(CRNs);
+                
             } else {
                 sections = SectionDB.getSectionsByCRN(CRNs);
                 sections.addAll(existingSections);
             }
             
+            List<Section> withoutDupes = (List<Section>) sections.stream()
+                                    .filter(distinctByKey(s -> s.getCrn()))
+                                    .collect(Collectors.toList());
             
             if ( sections != null ) {
-                request.getSession().setAttribute("cartSections", sections);
+                request.getSession().setAttribute("cartSections", withoutDupes);
             } else {
                 msg += "AddToCart Servlet Error: sections returned null";
                 URL = "/StudentHub.jsp";
@@ -61,9 +70,18 @@ public class AddToCartServlet extends HttpServlet {
             URL = "/StudentHub.jsp";
         }
         
+        
+        
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
+    }
+    
+    
+    //distinctByKey from: https://howtodoinjava.com/java8/java-stream-distinct-examples/
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
