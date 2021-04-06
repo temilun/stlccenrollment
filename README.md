@@ -1,6 +1,7 @@
 # STLCC Mobile Enrollment
 
 This is a student group project where we are building a mobile class registration web application.
+## [Video demo of finished project](https://vimeo.com/508250354)
 
 ## Development environment
 The project is being built with Netbeans 8.2 and JDK 8.
